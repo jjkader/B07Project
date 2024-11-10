@@ -40,6 +40,18 @@
         app:layout_constraintVertical_bias="0.732" />
 
     <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        app:layout_constraintBottom_toTopOf="@+id/buttonScroller"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.935" />
+
+    <Button
         android:id="@+id/buttonScroller"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

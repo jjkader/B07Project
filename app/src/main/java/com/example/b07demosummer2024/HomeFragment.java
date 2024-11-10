@@ -10,8 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.b07demosummer2024.ui.login.LoginFragment;
-
 public class HomeFragment extends Fragment {
     @Nullable
     @Override
@@ -23,6 +21,7 @@ public class HomeFragment extends Fragment {
         Button buttonSpinner = view.findViewById(R.id.buttonSpinner);
         Button buttonManageItems = view.findViewById(R.id.buttonManageItems);
         Button buttonLogin = view.findViewById(R.id.buttonLogin);
+        Button buttonRegister = view.findViewById(R.id.buttonRegister);
 
         buttonRecyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +52,11 @@ public class HomeFragment extends Fragment {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { loadFragment(new LoginFragment());}
+        });
+
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { loadFragment(new RegisterFragment());}
         });
 
         return view;
