@@ -35,7 +35,7 @@ public class AnnualCarbonActivity extends AppCompatActivity {
         // myRef.child("movies").setValue("B07 Demo!");
 
         if (savedInstanceState == null) {
-            loadFragment(new ACQ1Fragment());
+            loadFragment(new IntroToCalc());
         }
     }
 

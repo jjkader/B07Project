@@ -7,6 +7,7 @@ import com.example.b07demosummer2024.R;
 
 public abstract class AnnualCarbonInformation extends Fragment{
      static int[] PersonalVehicleUse = new int[3];
+     static String[] PVU = new String[3];
      static int[] PublicTransportation = new int[2];
      static int[] AirTravel = new int[2];
      static int[] Meat = new int[4];

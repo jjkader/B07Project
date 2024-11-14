@@ -25,15 +25,25 @@ public class ACQ1Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_a_c_q1, container, false);
+        TextView response= view.findViewById(R.id.Q1Response);
+        String text;
+        if (AnnualCarbonInformation.PersonalVehicleUse[0] == 0){
+            text = "Please enter your choice.";
+        }
 
-        TextView textView = view.findViewById(R.id.Q1Response);
+        else{
+            text = "You have selected: " + AnnualCarbonInformation.PVU[0];
+        }
+        response.setText(text);
+
         Button yesbutton = view.findViewById(R.id.Q1Yes);
         yesbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnnualCarbonInformation.PersonalVehicleUse[0] = 0;
-                String text = "You have entered: Yes";
-                textView.setText(text);
+                AnnualCarbonInformation.PersonalVehicleUse[0] = 1;
+                AnnualCarbonInformation.PVU[0] = "Yes";
+                String text = "You have selected: Yes";
+                response.setText(text);
             }
         });
 
@@ -41,9 +51,10 @@ public class ACQ1Fragment extends Fragment {
         nobutton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                AnnualCarbonInformation.PersonalVehicleUse[0] = 1;
-                String text = "You have entered: No";
-                textView.setText(text);
+                AnnualCarbonInformation.PersonalVehicleUse[0] = 2;
+                AnnualCarbonInformation.PVU[0] = "No";
+                String text = "You have selected: No";
+                response.setText(text);
             }
         });
 
@@ -55,6 +66,11 @@ public class ACQ1Fragment extends Fragment {
                 if (AnnualCarbonInformation.PersonalVehicleUse[0] == 1) {
                     loadFragment(new ACQ2Fragment());
                 }
+                /*
+                else{
+                    loadFragment(new ACQ4Fragment());
+                }
+                */
             }
         });
 

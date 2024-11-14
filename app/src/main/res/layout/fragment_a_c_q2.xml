@@ -1,14 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ACQ2Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AnnualCarbon.ACQ2Fragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/Question2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What type of car do you drive?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/Q2Gasoline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gasoline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Q2Diesel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Question2"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/Q2Diesel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diesel"
+        app:layout_constraintBottom_toBottomOf="@+id/Q2Gasoline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Q2Gasoline"
+        app:layout_constraintTop_toTopOf="@+id/Q2Gasoline" />
+
+    <Button
+        android:id="@+id/Q2Hybrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hybrid"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Q2Gasoline"
+        app:layout_constraintStart_toStartOf="@+id/Q2Gasoline"
+        app:layout_constraintTop_toBottomOf="@+id/Q2Gasoline"
+        app:layout_constraintVertical_bias="0.20" />
+
+    <Button
+        android:id="@+id/Q2Electric"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Electric"
+        app:layout_constraintBottom_toBottomOf="@+id/Q2Hybrid"
+        app:layout_constraintEnd_toEndOf="@+id/Q2Diesel"
+        app:layout_constraintStart_toStartOf="@+id/Q2Diesel"
+        app:layout_constraintTop_toTopOf="@+id/Q2Hybrid" />
+
+    <Button
+        android:id="@+id/Q2IDK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I don't know"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Q2Electric"
+        app:layout_constraintStart_toStartOf="@+id/Q2Hybrid"
+        app:layout_constraintTop_toBottomOf="@+id/Q2Electric"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <Button
+        android:id="@+id/Q2Next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <Button
+        android:id="@+id/Q2Back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="@+id/Q2Next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Q2Next" />
+
+    <TextView
+        android:id="@+id/Q2Response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/Q2Gasoline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Question2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
