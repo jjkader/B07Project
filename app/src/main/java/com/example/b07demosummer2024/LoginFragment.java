@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.ValueEventListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.database.DatabaseError;
 
 public class LoginFragment extends Fragment{
     EditText emailText, passText;
@@ -37,8 +44,9 @@ public class LoginFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
+        
         Button buttonLoginCred = view.findViewById(R.id.buttonLoginCred);
+        Button buttonPassReset = view.findViewById(R.id.buttonPassReset);
 
         emailText = (EditText)view.findViewById(R.id.editTextEmail);
         passText = (EditText)view.findViewById(R.id.editTextPassword);
@@ -68,8 +76,39 @@ public class LoginFragment extends Fragment{
                return;
             }
         });
+
+        buttonPassReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                email = emailText.getText().toString();
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(getContext(), "Please Provide Email", Toast.LENGTH_SHORT).show();
+                } else {
+                    DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
+
+                    usersRef.orderByChild("email").equalTo(email)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        // TODO: Send the user a reset password email
+                                        resetPassword();
+                                    } else {
+                                        Toast.makeText(getContext(), "Email does not exist", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    System.out.println("Error: " + databaseError.getMessage());
+                                }
+                            });
+                    // TODO: check if email exists and if it does send auth code and redirect
+                }
+            }
+        });
         return view;
     }
+
 
     public static boolean isValidEmail(CharSequence target) {
         if (TextUtils.isEmpty(target)) {
@@ -102,5 +141,15 @@ public class LoginFragment extends Fragment{
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void resetPassword(){
+        mAuth.sendPasswordResetEmail(email)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getContext(), "Reset password email sent", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
