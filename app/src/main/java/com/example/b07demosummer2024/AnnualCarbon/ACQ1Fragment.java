@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.example.b07demosummer2024.R;
 
-public class ACQ1Fragment extends Fragment {
+public class ACQ1Fragment extends LoadFragment {
 
     public ACQ1Fragment() {
         // Required empty public constructor
@@ -25,16 +25,8 @@ public class ACQ1Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_a_c_q1, container, false);
-        TextView response= view.findViewById(R.id.Q1Response);
-        String text;
-        if (AnnualCarbonInformation.PersonalVehicleUse[0] == 0){
-            text = "Please enter your choice.";
-        }
-
-        else{
-            text = "You have selected: " + AnnualCarbonInformation.PVU[0];
-        }
-        response.setText(text);
+        TextView textview = view.findViewById(R.id.Q1Response);
+        set(textview, AnnualCarbonInformation.PersonalVehicleUse, AnnualCarbonInformation.PVU, 0);
 
         Button yesbutton = view.findViewById(R.id.Q1Yes);
         yesbutton.setOnClickListener(new View.OnClickListener() {
@@ -42,8 +34,7 @@ public class ACQ1Fragment extends Fragment {
             public void onClick(View v) {
                 AnnualCarbonInformation.PersonalVehicleUse[0] = 1;
                 AnnualCarbonInformation.PVU[0] = "Yes";
-                String text = "You have selected: Yes";
-                response.setText(text);
+                set(textview, AnnualCarbonInformation.PersonalVehicleUse, AnnualCarbonInformation.PVU, 0);
             }
         });
 
@@ -53,8 +44,7 @@ public class ACQ1Fragment extends Fragment {
             public void onClick(View v) {
                 AnnualCarbonInformation.PersonalVehicleUse[0] = 2;
                 AnnualCarbonInformation.PVU[0] = "No";
-                String text = "You have selected: No";
-                response.setText(text);
+                set(textview, AnnualCarbonInformation.PersonalVehicleUse, AnnualCarbonInformation.PVU, 0);
             }
         });
 
@@ -78,11 +68,5 @@ public class ACQ1Fragment extends Fragment {
 
     }
 
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
 
 }
