@@ -66,7 +66,7 @@ public class LoginFragment extends Fragment{
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                                    loadFragment(new HomeFragment()); // TODO: Should replace HomeFragment with the next app fragment
+                                    loadFragment(new NavigationFragment()); // TODO: Should replace HomeFragment with the next app fragment
                                 } else {
                                     Toast.makeText(getContext(), "Invalid email or password",
                                             Toast.LENGTH_SHORT).show();
