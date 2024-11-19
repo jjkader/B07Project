@@ -4,19 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.IntentCompat;
 
 import android.text.TextUtils;
-import android.util.Log;
-import android.util.Patterns;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,28 +22,27 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.ValueEventListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.database.DatabaseError;
 
-public class LoginFragment extends Fragment{
-    EditText emailText, passText;
-    String email, password;
+public class LoginActivity extends AppCompatActivity {
+    private EditText emailText, passText;
+    private String email, password;
     private FirebaseAuth mAuth;
 
-    public LoginFragment() {
+    public LoginActivity() {
         // Required empty public constructor
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
         
-        Button buttonLoginCred = view.findViewById(R.id.buttonLoginCred);
-        Button buttonPassReset = view.findViewById(R.id.buttonPassReset);
+        Button buttonLoginCred = findViewById(R.id.buttonLoginCred);
+        Button buttonPassReset = findViewById(R.id.buttonPassReset);
 
-        emailText = (EditText)view.findViewById(R.id.editTextEmail);
-        passText = (EditText)view.findViewById(R.id.editTextPassword);
+        emailText = (EditText)findViewById(R.id.editTextEmail);
+        passText = (EditText)findViewById(R.id.editTextPassword);
         mAuth = FirebaseAuth.getInstance();
 
         buttonLoginCred.setOnClickListener(new View.OnClickListener() {
@@ -59,16 +52,20 @@ public class LoginFragment extends Fragment{
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
                     return;
                 }
-                // TODO: check if email/pass are in the database, login only if found
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                                    loadFragment(new NavigationFragment()); // TODO: Should replace HomeFragment with the next app fragment
+                                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                    // TODO: If user is new, send to setup questions, otherwise send to navigation
+                                    Intent myIntent = new Intent(LoginActivity.this, NavigationActivity.class);
+                                    // clear activities before NavigationActivity
+                                    myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    LoginActivity.this.startActivity(myIntent);
+                                    finish();
                                 } else {
-                                    Toast.makeText(getContext(), "Invalid email or password",
+                                    Toast.makeText(LoginActivity.this, "Invalid email or password",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -82,7 +79,7 @@ public class LoginFragment extends Fragment{
             public void onClick(View v) {
                 email = emailText.getText().toString();
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getContext(), "Please Provide Email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Please Provide Email", Toast.LENGTH_SHORT).show();
                 } else {
                     DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
 
@@ -94,7 +91,7 @@ public class LoginFragment extends Fragment{
                                         // TODO: Send the user a reset password email
                                         resetPassword();
                                     } else {
-                                        Toast.makeText(getContext(), "Email does not exist", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Email does not exist", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                                 @Override
@@ -102,45 +99,32 @@ public class LoginFragment extends Fragment{
                                     System.out.println("Error: " + databaseError.getMessage());
                                 }
                             });
-                    // TODO: check if email exists and if it does send auth code and redirect
                 }
             }
         });
-        return view;
     }
 
-
-    public static boolean isValidEmail(CharSequence target) {
-        if (TextUtils.isEmpty(target)) {
+    private boolean checkFields() {
+        if (TextUtils.isEmpty(emailText.getText().toString())) {
+            Toast.makeText(LoginActivity.this, "Please enter an email", Toast.LENGTH_SHORT).show();
             return false;
         }
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-    }
-
-
-    public boolean checkFields() {
-        // TODO: add check for null and processing for valid/invalid email/password
-        if (TextUtils.isEmpty(passText.getText().toString())|| TextUtils.isEmpty(emailText.getText().toString()) || passText.getText().toString().length() < 6){
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailText.getText().toString()).matches()) { // check valid email
+            Toast.makeText(LoginActivity.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
             return false;
         }
-        return isValidEmail(emailText.getText().toString());
+        if (TextUtils.isEmpty(passText.getText().toString()) || passText.getText().toString().length() < 6) {
+            Toast.makeText(LoginActivity.this, "Password must be at least 7 characters long", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
-    public void setCredentials() {
+    private void setCredentials() {
         if (checkFields()) {
             email = emailText.getText().toString();
             password = passText.getText().toString();
-            return;
         }
-        // TODO: if checkFields() fails, add message/error handling
-        Toast.makeText(getContext(), "Please enter valid credentials", Toast.LENGTH_SHORT).show();
-    }
-
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 
     private void resetPassword(){
@@ -148,7 +132,7 @@ public class LoginFragment extends Fragment{
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(getContext(), "Reset password email sent", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Reset password email sent", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
