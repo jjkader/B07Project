@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AnnualCarbon.ACQ7Fragment" >
+
+    <TextView
+        android:id="@+id/Q7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="How many long-haul flights (more than 1,500 km/932 miles) have you taken in the past year?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <Button
+        android:id="@+id/Q7Six"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6-10 Flights"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Q7Three"
+        app:layout_constraintEnd_toEndOf="@+id/Q7One"
+        app:layout_constraintStart_toStartOf="@+id/Q7One"
+        app:layout_constraintTop_toTopOf="@+id/Q7Three" />
+
+    <Button
+        android:id="@+id/Q7Three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3-5 Flights"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/Q7None"
+        app:layout_constraintStart_toStartOf="@id/Q7None"
+        app:layout_constraintTop_toBottomOf="@id/Q7None"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/Q7One"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1-2 Flights"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/Q7None"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/Q7None"
+        app:layout_constraintTop_toTopOf="@id/Q7None" />
+
+    <Button
+        android:id="@+id/Q7Next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <Button
+        android:id="@+id/Q7None"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="None"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Q7One"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Q7"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/Q7Ten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="More than 10 Flights"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Q7Three"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/Q7Back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/Q7Next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Q7Next" />
+
+    <TextView
+        android:id="@+id/Q7Response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/Q7None"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Q7" />
+</androidx.constraintlayout.widget.ConstraintLayout>

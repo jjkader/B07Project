@@ -2,18 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ACQ2Layout"
+    android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AnnualCarbon.ACQ2Fragment">
+    tools:context=".AnnualCarbon.ACQ5Fragment" >
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/Question2"
+        android:id="@+id/Q5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="What type of car do you drive?"
+        android:text="How much time do you spend on public transport per week (bus, train, subway)?"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,65 +22,65 @@
         app:layout_constraintVertical_bias="0.1" />
 
     <Button
-        android:id="@+id/Q2Gasoline"
+        android:id="@+id/Q5One"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gasoline"
-        android:textSize="24sp"
+        android:text="Under 1 Hour"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Q2Diesel"
+        app:layout_constraintEnd_toStartOf="@id/Q5Three"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Question2"
+        app:layout_constraintTop_toBottomOf="@+id/Q5"
         app:layout_constraintVertical_bias="0.2" />
 
     <Button
-        android:id="@+id/Q2Diesel"
+        android:id="@+id/Q5Three"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Diesel"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/Q2Gasoline"
+        android:text="1-3 Hours"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Q5One"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Q2Gasoline"
-        app:layout_constraintTop_toTopOf="@+id/Q2Gasoline" />
+        app:layout_constraintStart_toEndOf="@+id/Q5One"
+        app:layout_constraintTop_toTopOf="@+id/Q5One" />
 
     <Button
-        android:id="@+id/Q2Hybrid"
+        android:id="@+id/Q5Five"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hybrid"
-        android:textSize="24sp"
+        android:text="3-5 Hours"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/Q2Gasoline"
-        app:layout_constraintStart_toStartOf="@+id/Q2Gasoline"
-        app:layout_constraintTop_toBottomOf="@+id/Q2Gasoline"
-        app:layout_constraintVertical_bias="0.20" />
+        app:layout_constraintEnd_toEndOf="@+id/Q5One"
+        app:layout_constraintStart_toStartOf="@+id/Q5One"
+        app:layout_constraintTop_toBottomOf="@+id/Q5One"
+        app:layout_constraintVertical_bias="0.2" />
 
     <Button
-        android:id="@+id/Q2Electric"
+        android:id="@+id/Q5Ten"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Electric"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/Q2Hybrid"
-        app:layout_constraintEnd_toEndOf="@+id/Q2Diesel"
-        app:layout_constraintStart_toStartOf="@+id/Q2Diesel"
-        app:layout_constraintTop_toTopOf="@+id/Q2Hybrid" />
+        android:text="5-10 Hours"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Q5Five"
+        app:layout_constraintEnd_toEndOf="@+id/Q5Three"
+        app:layout_constraintStart_toStartOf="@+id/Q5Three"
+        app:layout_constraintTop_toTopOf="@+id/Q5Five" />
 
     <Button
-        android:id="@+id/Q2IDK"
+        android:id="@+id/Q5G10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I don't know"
-        android:textSize="24sp"
+        android:text="More than 10 Hours"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Q2Electric"
-        app:layout_constraintVertical_bias="0.20" />
+        app:layout_constraintTop_toBottomOf="@+id/Q5Ten"
+        app:layout_constraintVertical_bias="0.2" />
 
     <Button
-        android:id="@+id/Q2Next"
+        android:id="@+id/Q5Next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next"
@@ -91,27 +90,26 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintVertical_bias="0.90" />
 
     <Button
-        android:id="@+id/Q2Back"
+        android:id="@+id/Q5Back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/Q2Next"
+        app:layout_constraintBottom_toBottomOf="@+id/Q5Next"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Q2Next" />
+        app:layout_constraintTop_toTopOf="@+id/Q5Next" />
 
     <TextView
-        android:id="@+id/Q2Response"
+        android:id="@+id/Q5Response"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/Q2Gasoline"
+        app:layout_constraintBottom_toTopOf="@+id/Q5One"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Question2" />
-
+        app:layout_constraintTop_toBottomOf="@+id/Q5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

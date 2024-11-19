@@ -36,6 +36,7 @@ public class ACQ3Fragment extends LoadFragment {
         Button Op5 = view.findViewById(R.id.Q325000);
         Button Op6 = view.findViewById(R.id.Q335000);
         Button back = view.findViewById(R.id.Q3Back);
+        Button next = view.findViewById(R.id.Q3Next);
 
         set(textview, AnnualCarbonInformation.PersonalVehicleUse, AnnualCarbonInformation.PVU, 2);
         if (AnnualCarbonInformation.PersonalVehicleUse[2] != 0){
@@ -152,7 +153,14 @@ public class ACQ3Fragment extends LoadFragment {
 
         });
 
-
+        next.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if (AnnualCarbonInformation.PersonalVehicleUse[2] != 0){
+                    loadFragment(new ACQ4Fragment());
+                }
+            }
+        });
         return view;
     }
 

@@ -56,11 +56,11 @@ public class ACQ1Fragment extends LoadFragment {
                 if (AnnualCarbonInformation.PersonalVehicleUse[0] == 1) {
                     loadFragment(new ACQ2Fragment());
                 }
-                /*
-                else{
+
+                else if (AnnualCarbonInformation.PersonalVehicleUse[0] == 2){
                     loadFragment(new ACQ4Fragment());
                 }
-                */
+
             }
         });
 
