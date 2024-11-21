@@ -4,82 +4,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_grey"
     tools:context=".HomeFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="173dp"
-        android:layout_height="59dp"
-        android:contentDescription="Planetze Logo"
-        android:src="@drawable/planetze_logo"
+    <ImageButton
+        android:id="@+id/planetzeLogo"
+        android:layout_width="231dp"
+        android:layout_height="108dp"
+        android:backgroundTint="@color/light_grey"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.050000012"
+        app:srcCompat="@drawable/planetze_logo" />
 
     <Button
         android:id="@+id/buttonRecyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="@string/recyclerview"
-        app:layout_constraintBottom_toTopOf="@+id/buttonScroller"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.72" />
 
     <Button
         android:id="@+id/buttonLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Login"
-        app:layout_constraintBottom_toTopOf="@+id/buttonScroller"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.732" />
+        app:layout_constraintVertical_bias="0.36" />
 
     <Button
         android:id="@+id/buttonRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Register"
-        app:layout_constraintBottom_toTopOf="@+id/buttonScroller"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935" />
+        app:layout_constraintVertical_bias="0.52" />
 
     <Button
         android:id="@+id/buttonScroller"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="@string/scroller"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSpinner"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRecyclerView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.79" />
 
     <Button
         android:id="@+id/buttonSpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="@string/spinner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonScroller" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.87" />
 
     <Button
         android:id="@+id/buttonManageItems"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="@string/manage_items"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSpinner" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

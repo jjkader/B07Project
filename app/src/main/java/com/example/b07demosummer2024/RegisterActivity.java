@@ -1,6 +1,7 @@
 package com.example.b07demosummer2024;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -52,7 +53,8 @@ public class RegisterActivity extends AppCompatActivity {
         logo.setOnClickListener(new View.OnClickListener(){
            @Override
            public void onClick(View v){
-               finish();
+               Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://planetze.io/"));
+               startActivity(browserIntent);
            }
         });
 

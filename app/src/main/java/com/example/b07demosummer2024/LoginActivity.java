@@ -1,6 +1,7 @@
 package com.example.b07demosummer2024;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,13 +39,22 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        
+
+        ImageButton logo = findViewById(R.id.planetzeLogo);
         Button buttonLoginCred = findViewById(R.id.buttonLoginCred);
         Button buttonPassReset = findViewById(R.id.buttonPassReset);
 
         emailText = (EditText)findViewById(R.id.editTextEmail);
         passText = (EditText)findViewById(R.id.editTextPassword);
         mAuth = FirebaseAuth.getInstance();
+
+        logo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://planetze.io/"));
+                startActivity(browserIntent);
+            }
+        });
 
         buttonLoginCred.setOnClickListener(new View.OnClickListener() {
             @Override
