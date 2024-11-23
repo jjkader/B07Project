@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_grey">#d8dbe2</color>
+    <color name="grey">#a9bcd0</color>
+    <color name="turquoise">#009999</color>
+    <color name="dark_grey">#373f51</color>
+    <color name="black_planetze">#1b1b1e</color>
 </resources>
