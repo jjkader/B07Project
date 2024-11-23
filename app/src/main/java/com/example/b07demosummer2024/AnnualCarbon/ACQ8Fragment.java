@@ -85,11 +85,16 @@ public class ACQ8Fragment extends LoadFragment {
             @Override
             public void onClick(View V){
                 if (AnnualCarbonInformation.Food[0] != 0){
-                    //loadFragment(new ACQ9Fragment());
+                    if (AnnualCarbonInformation.Food[0] == 4){
+                        loadFragment(new ACQ9Fragment(1));
+                    }
+                    else{
+                        //loadFragment(new ACQ10Fragment());
+                    }
+
                 }
             }
         });
-
 
         return view;
     }

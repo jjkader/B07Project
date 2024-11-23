@@ -31,4 +31,15 @@ public class LoadFragment extends Fragment{
         }
         View.setText(text);
     }
+
+    public void foodsetter(TextView View, int[] arr, String[] response, int index, String text){
+        String text2;
+        if (arr[index] == 0){
+            text2 = "Please enter your choice for " + text;
+        }
+        else{
+            text2 = "For " + text + ", you have selected: " + response[index];
+        }
+        View.setText(text2);
+    }
 }
