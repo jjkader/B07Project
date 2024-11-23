@@ -77,11 +77,11 @@
         android:text="Occasionally: 1-2 times/week, Frequently: 3-4 times/week, Always: 5+ times/week"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/Q4Back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Q4Frequently"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.40" />
 
     <TextView
         android:id="@+id/Q4Response"

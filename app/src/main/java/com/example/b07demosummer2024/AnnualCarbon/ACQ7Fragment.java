@@ -95,7 +95,7 @@ public class ACQ7Fragment extends LoadFragment {
             @Override
             public void onClick(View V){
                 if (AnnualCarbonInformation.AirTravel[1] != 0){
-                    //loadFragment(new ACQ8Fragment());
+                    loadFragment(new ACQ8Fragment());
                 }
             }
         });

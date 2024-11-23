@@ -12,8 +12,10 @@ public abstract class AnnualCarbonInformation extends Fragment{
      static String[] PT = new String[2];
      static int[] AirTravel = new int[2];
      static String[] AT = new String[2];
-     static int[] Meat = new int[4];
-     static int Waste;
+     static int[] Food = new int[6];
+
+     static String[] F = new String[6];
+
      static int[] Housing = new int[7];
      static int[] Consumption = new int[4];
 
