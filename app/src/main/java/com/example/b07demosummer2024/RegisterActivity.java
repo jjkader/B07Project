@@ -82,6 +82,14 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = auth.getCurrentUser();
                                     sendEmail(user);
+                                    User u = new User(first_name, last_name, email, password);
+                                    DatabaseReference db = FirebaseDatabase.getInstance(
+                                            "https://b07project-725cc-default-rtdb.firebaseio.com/").getReference();
+                                    addToDatabase(db, u);
+                                    Toast.makeText(RegisterActivity.this, "Redirecting to Login Page!", Toast.LENGTH_LONG).show();
+                                    Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    RegisterActivity.this.startActivity(myIntent);
+                                    finish();
                                 }
                                 else {
                                     Toast.makeText(RegisterActivity.this, "Authentication failed.",
@@ -89,14 +97,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                             }
                         });
-                User u = new User(first_name, last_name, email, password);
-                DatabaseReference db = FirebaseDatabase.getInstance(
-                        "https://b07project-725cc-default-rtdb.firebaseio.com/").getReference();
-                addToDatabase(db, u);
-                Toast.makeText(RegisterActivity.this, "Redirecting to Login Page!", Toast.LENGTH_LONG).show();
-                Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-                RegisterActivity.this.startActivity(myIntent);
-                finish();
             }
         });
     }
@@ -121,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, "Password must be at least 7 characters long", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (passConfirmText.getText().toString().equals(passText.getText().toString())) {
+        if (!passConfirmText.getText().toString().equals(passText.getText().toString())) {
             Toast.makeText(RegisterActivity.this, "Passwords must match", Toast.LENGTH_SHORT).show();
             return false;
         }
