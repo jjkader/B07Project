@@ -84,7 +84,7 @@ public class ACQ18Fragment extends LoadFragment {
             @Override
             public void onClick(View V){
                 if (AnnualCarbonInformation.Consumption[0] != 0){
-                    //loadFragment(new ACQ19Fragment());
+                    loadFragment(new ACQ19Fragment());
                 }
             }
         });
