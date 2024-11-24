@@ -43,6 +43,10 @@ public class ACQ8Fragment extends LoadFragment {
                 AnnualCarbonInformation.Food[0] = 1;
                 AnnualCarbonInformation.F[0] = "Vegetarian";
                 set(textview, AnnualCarbonInformation.Food, AnnualCarbonInformation.F, 0);
+                for (int i = 1; i <= 4; i++){
+                    AnnualCarbonInformation.Food[i] = 0;
+                    AnnualCarbonInformation.F[i] = null;
+                }
             }
         });
 
@@ -52,6 +56,10 @@ public class ACQ8Fragment extends LoadFragment {
                 AnnualCarbonInformation.Food[0] = 2;
                 AnnualCarbonInformation.F[0] = "Vegan";
                 set(textview, AnnualCarbonInformation.Food, AnnualCarbonInformation.F, 0);
+                for (int i = 1; i <= 4; i++){
+                    AnnualCarbonInformation.Food[i] = 0;
+                    AnnualCarbonInformation.F[i] = null;
+                }
             }
         });
 
@@ -61,6 +69,10 @@ public class ACQ8Fragment extends LoadFragment {
                 AnnualCarbonInformation.Food[0] = 3;
                 AnnualCarbonInformation.F[0] = "Pescatarian";
                 set(textview, AnnualCarbonInformation.Food, AnnualCarbonInformation.F, 0);
+                for (int i = 1; i <= 4; i++){
+                    AnnualCarbonInformation.Food[i] = 0;
+                    AnnualCarbonInformation.F[i] = null;
+                }
             }
         });
 
