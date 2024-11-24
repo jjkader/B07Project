@@ -92,7 +92,7 @@ public class ACQ15Fragment extends LoadFragment {
             @Override
             public void onClick(View V){
                 if (AnnualCarbonInformation.Housing[4] != 0){
-                    //loadFragment(new ACQ16Fragment());
+                    loadFragment(new ACQ16Fragment());
                 }
             }
         });
