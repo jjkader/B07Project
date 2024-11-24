@@ -1,8 +1,5 @@
 package com.example.b07demosummer2024.AnnualCarbon;
 
-
-import android.app.Person;
-
 public abstract class AnnualCarbonInformation{
      static int[] PersonalVehicleUse = new int[3];
      static String[] PVU = new String[3];
@@ -21,10 +18,10 @@ public abstract class AnnualCarbonInformation{
 
      }
 
-     public double transportationCalc(){
+     public static double transportationCalc(){
           double total = 0;
           //PVU Calculation
-          if (PersonalVehicleUse[0] != 0){
+          if (PersonalVehicleUse[0] == 1){
                double[] EF = {0.24,0.27,0.16,0.05,0}; //Emission factor based on type of car
                double[] distance = {5000, 10000, 15000, 20000, 25000, 35000}; //Total distance driven
                int typeOfCar = PersonalVehicleUse[1];

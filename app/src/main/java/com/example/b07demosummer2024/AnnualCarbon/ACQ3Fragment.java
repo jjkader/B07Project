@@ -115,7 +115,7 @@ public class ACQ3Fragment extends LoadFragment {
         Op4.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
-                AnnualCarbonInformation.PersonalVehicleUse[2] = 1;
+                AnnualCarbonInformation.PersonalVehicleUse[2] = 4;
                 AnnualCarbonInformation.PVU[2] = "15000-20000/9000-12000";
                 set(textview, AnnualCarbonInformation.PersonalVehicleUse, AnnualCarbonInformation.PVU, 2);
                 String kmm = " kilometers/miles";
@@ -126,7 +126,7 @@ public class ACQ3Fragment extends LoadFragment {
         Op5.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
-                AnnualCarbonInformation.PersonalVehicleUse[2] = 1;
+                AnnualCarbonInformation.PersonalVehicleUse[2] = 5;
                 AnnualCarbonInformation.PVU[2] = "20000-25000/12000-15000";
                 set(textview, AnnualCarbonInformation.PersonalVehicleUse, AnnualCarbonInformation.PVU, 2);
                 String kmm = " kilometers/miles";
@@ -137,7 +137,7 @@ public class ACQ3Fragment extends LoadFragment {
         Op6.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
-                AnnualCarbonInformation.PersonalVehicleUse[2] = 1;
+                AnnualCarbonInformation.PersonalVehicleUse[2] = 6;
                 AnnualCarbonInformation.PVU[2] = "25000+/15000+";
                 set(textview, AnnualCarbonInformation.PersonalVehicleUse, AnnualCarbonInformation.PVU, 2);
                 String kmm = " kilometers/miles";
