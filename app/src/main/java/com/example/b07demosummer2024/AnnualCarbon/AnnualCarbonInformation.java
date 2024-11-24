@@ -15,6 +15,7 @@ public abstract class AnnualCarbonInformation{
      static int[] Housing = new int[7];
      static String[] H = new String[7];
      static int[] Consumption = new int[4];
+     static String[] C = new String[4];
 
      public AnnualCarbonInformation(){
 
