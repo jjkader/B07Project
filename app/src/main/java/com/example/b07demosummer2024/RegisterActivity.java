@@ -85,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     User u = new User(first_name, last_name, email, password);
                                     DatabaseReference db = FirebaseDatabase.getInstance(
                                             "https://b07project-725cc-default-rtdb.firebaseio.com/").getReference();
-                                    addToDatabase(db, u);
+                                    addToDatabase(db, u, user.getUid());
                                     Toast.makeText(RegisterActivity.this, "Redirecting to Login Page!", Toast.LENGTH_LONG).show();
                                     Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
                                     RegisterActivity.this.startActivity(myIntent);
@@ -161,8 +161,8 @@ public class RegisterActivity extends AppCompatActivity {
                 });
 
     }
-    private void addToDatabase(DatabaseReference db, User u){
-        DatabaseReference key = db.child("users").push();
+    private void addToDatabase(DatabaseReference db, User u, String uid){
+        DatabaseReference key = db.child("users").child(uid);
         key.setValue(u);
     }
 }
