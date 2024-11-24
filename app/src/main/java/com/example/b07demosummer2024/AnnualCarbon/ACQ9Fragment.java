@@ -97,7 +97,9 @@ public class ACQ9Fragment extends LoadFragment {
             @Override
             public void onClick(View V){
                 if (currpage == 4){
-                    //loadFragment(new ACQ10Fragment());
+                    if (AnnualCarbonInformation.Food[4] != 0){
+                        loadFragment(new ACQ10Fragment());
+                    }
                 }
                 else{
                     if (AnnualCarbonInformation.Food[currpage] != 0){
@@ -107,18 +109,6 @@ public class ACQ9Fragment extends LoadFragment {
             }
         });
 
-
-
-    /*
-        for (int i = 1; i <= 4; i++){
-            if (AnnualCarbonInformation.)
-            if (AnnualCarbonInformation.Food[i] == 0){
-                foodsetter(textview, AnnualCarbonInformation.Food, AnnualCarbonInformation.F, )
-            }
-        }
-
-
-        */
         return view;
 
 
