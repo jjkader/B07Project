@@ -101,7 +101,7 @@ public class ACQ8Fragment extends LoadFragment {
                         loadFragment(new ACQ9Fragment(1));
                     }
                     else{
-                        //loadFragment(new ACQ10Fragment());
+                        loadFragment(new ACQ10Fragment());
                     }
 
                 }
