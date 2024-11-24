@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.b07demosummer2024.DailyActivity.DailyTrackingActivity;
+import com.example.b07demosummer2024.DailyActivity.EcoTrackerHomeFragment;
+
 public class NavigationActivity extends AppCompatActivity {
 
     public NavigationActivity() {
@@ -43,7 +46,8 @@ public class NavigationActivity extends AppCompatActivity {
         buttonNavTracker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(new SpinnerFragment());
+                Intent myIntent = new Intent(NavigationActivity.this, DailyTrackingActivity.class);
+                NavigationActivity.this.startActivity(myIntent);
             }
         });
 

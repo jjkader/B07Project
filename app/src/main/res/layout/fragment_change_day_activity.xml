@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey"
+    tools:context=".DailyActivity.ChangeDayActivityFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDate">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Switch
+                android:id="@+id/milesSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Switch to miles? (km default)" />
+
+            <TextView
+                android:id="@+id/textBlankDefault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Leave blank for default"
+                android:textColor="@color/black_planetze"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textTransportation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Transportation"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/black_planetze" />
+
+            <EditText
+                android:id="@+id/editPersonalDist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Distance Driven (Personal Vehicle)"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/editPublicTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Time Spent on Public Transport (in h)"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/editWalkDist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Distance Walked/Cycled"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/editNumFlights"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Flights Taken"
+                android:inputType="number" />
+
+            <RadioGroup
+                android:id="@+id/RadioHaul"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/radioShortHaul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Short-Haul Flight" />
+
+                <RadioButton
+                    android:id="@+id/radioLongHaul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Long-Haul Flight" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textFood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Food"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/black_planetze" />
+
+            <EditText
+                android:id="@+id/editBeef"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Beef Meals"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editPork"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Pork Meals"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editChicken"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Chicken Meals"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editFish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Fish Meals"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editPlant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Plant-based Meals"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textConsumption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Consumption/Shopping"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/black_planetze" />
+
+            <EditText
+                android:id="@+id/editNumClothes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Number of Clothes Purchased"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editNumElectronics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Number of Electronics Purchased"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/editOtherType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Other Type of Purchase (e.g. Furniture)"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/editNumOther"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Number of Other Purchased"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/submitChanges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:backgroundTint="@color/turquoise"
+                android:text="Save Changes" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="textView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
