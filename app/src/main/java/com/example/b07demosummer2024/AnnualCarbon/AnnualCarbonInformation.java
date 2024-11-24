@@ -17,6 +17,7 @@ public abstract class AnnualCarbonInformation{
      static String[] F = new String[6];
 
      static int[] Housing = new int[7];
+     static String[] H = new String[7];
      static int[] Consumption = new int[4];
      static FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 

@@ -45,6 +45,10 @@ public class ACQ1Fragment extends LoadFragment {
                 AnnualCarbonInformation.PersonalVehicleUse[0] = 2;
                 AnnualCarbonInformation.PVU[0] = "No";
                 set(textview, AnnualCarbonInformation.PersonalVehicleUse, AnnualCarbonInformation.PVU, 0);
+                for (int i = 1; i <= 2; i++){
+                    AnnualCarbonInformation.PersonalVehicleUse[i] = 0;
+                    AnnualCarbonInformation.PVU[i] = null;
+                }
             }
         });
 

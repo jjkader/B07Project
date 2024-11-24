@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout9"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AnnualCarbon.ACQ11Fragment">
+
+    <Button
+        android:id="@+id/Q11Next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <Button
+        android:id="@+id/Q11Apt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Condo/Apartment"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/Q11Town"
+        app:layout_constraintEnd_toEndOf="@id/Q11Semi"
+        app:layout_constraintStart_toStartOf="@id/Q11Semi"
+        app:layout_constraintTop_toTopOf="@id/Q11Town" />
+
+    <Button
+        android:id="@+id/Q11Back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/Q11Next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Q11Next" />
+
+    <Button
+        android:id="@+id/Q11Other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Other"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Q11Town"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/Q11Det"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detached"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/Q11Semi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Q11"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <TextView
+        android:id="@+id/Q11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="What type of home do you live in?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <Button
+        android:id="@+id/Q11Semi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Semi-detached"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/Q11Det"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/Q11Det"
+        app:layout_constraintTop_toTopOf="@id/Q11Det" />
+
+    <Button
+        android:id="@+id/Q11Town"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Townhouse"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/Q11Det"
+        app:layout_constraintStart_toStartOf="@id/Q11Det"
+        app:layout_constraintTop_toBottomOf="@id/Q11Det"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <TextView
+        android:id="@+id/Q11Response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/Q11Det"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Q11" />
+</androidx.constraintlayout.widget.ConstraintLayout>
