@@ -27,7 +27,6 @@ public class ACQ1Fragment extends LoadFragment {
         View view = inflater.inflate(R.layout.fragment_a_c_q1, container, false);
         TextView textview = view.findViewById(R.id.Q1Response);
         set(textview, AnnualCarbonInformation.PersonalVehicleUse, AnnualCarbonInformation.PVU, 0);
-
         Button yesbutton = view.findViewById(R.id.Q1Yes);
         yesbutton.setOnClickListener(new View.OnClickListener() {
             @Override

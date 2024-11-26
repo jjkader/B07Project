@@ -13,27 +13,26 @@ import androidx.fragment.app.FragmentTransaction;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.example.b07demosummer2024.HomeFragment;
 import com.example.b07demosummer2024.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AnnualCarbonActivity extends AppCompatActivity {
 
-    FirebaseDatabase db;
+    FirebaseDatabase fdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        db = FirebaseDatabase.getInstance("https://b07-demo-summer-2024-default-rtdb.firebaseio.com/");
-        DatabaseReference myRef = db.getReference("testDemo");
-
-//        myRef.setValue("B07 Demo!");
-        // myRef.child("movies").setValue("B07 Demo!");
-
         if (savedInstanceState == null) {
             loadFragment(new IntroToCalcFragment());
         }

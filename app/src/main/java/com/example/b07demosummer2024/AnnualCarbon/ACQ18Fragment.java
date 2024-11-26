@@ -29,7 +29,6 @@ public class ACQ18Fragment extends LoadFragment {
         TextView textview = view.findViewById(R.id.Q18Response);
         set(textview, AnnualCarbonInformation.Consumption, AnnualCarbonInformation.C, 0);
 
-
         Button monthly = view.findViewById(R.id.Q18Monthly);
         Button quarterly = view.findViewById(R.id.Q18Quarterly);
         Button annually = view.findViewById(R.id.Q18Annually);
