@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey"
+    tools:context=".AnnualCarbon.ACQ3Fragment">
+
+    <TextView
+        android:id="@+id/Question3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="How many kilometers/miles do you drive per year?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <Button
+        android:id="@+id/Q35000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Up to 5000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Q310000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Question3"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/Q310000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="5000-10000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Q35000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Q35000"
+        app:layout_constraintTop_toTopOf="@+id/Q35000" />
+
+    <Button
+        android:id="@+id/Q315000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="10000-15000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Q35000"
+        app:layout_constraintStart_toStartOf="@+id/Q35000"
+        app:layout_constraintTop_toBottomOf="@+id/Q35000"
+        app:layout_constraintVertical_bias="0.20" />
+
+    <Button
+        android:id="@+id/Q320000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="15000-20000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/Q315000"
+        app:layout_constraintEnd_toEndOf="@+id/Q310000"
+        app:layout_constraintStart_toStartOf="@+id/Q310000"
+        app:layout_constraintTop_toTopOf="@id/Q315000" />
+
+    <Switch
+        android:id="@+id/Q3Miles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Miles"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Q325000"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <Button
+        android:id="@+id/Q325000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="20000-25000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Q315000"
+        app:layout_constraintStart_toStartOf="@+id/Q315000"
+        app:layout_constraintTop_toBottomOf="@+id/Q315000"
+        app:layout_constraintVertical_bias="0.30" />
+
+    <Button
+        android:id="@+id/Q335000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="25000+"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Q325000"
+        app:layout_constraintEnd_toEndOf="@+id/Q320000"
+        app:layout_constraintStart_toStartOf="@+id/Q320000"
+        app:layout_constraintTop_toTopOf="@+id/Q325000" />
+
+    <TextView
+        android:id="@+id/Q3Response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/Q35000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Question3" />
+
+    <Button
+        android:id="@+id/Q3Next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Next"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.90" />
+
+    <Button
+        android:id="@+id/Q3Back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Back"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Q3Next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Q3Next" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

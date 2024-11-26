@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey"
+    tools:context=".AnnualCarbon.ACQ6Fragment">
+
+    <TextView
+        android:id="@+id/Q6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="How many short-haul flights (less than 1,500 km/932 miles) have you taken in the past year?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <Button
+        android:id="@+id/Q6None"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="None"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Q6One"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Q6"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/Q6One"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="1-2 Flights"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Q6None"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Q6None"
+        app:layout_constraintTop_toTopOf="@+id/Q6None" />
+
+    <Button
+        android:id="@+id/Q6Three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="3-5 Flights"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Q6None"
+        app:layout_constraintStart_toStartOf="@+id/Q6None"
+        app:layout_constraintTop_toBottomOf="@+id/Q6None"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/Q6Six"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="6-10 Flights"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Q6Three"
+        app:layout_constraintEnd_toEndOf="@+id/Q6One"
+        app:layout_constraintStart_toStartOf="@+id/Q6One"
+        app:layout_constraintTop_toTopOf="@+id/Q6Three" />
+
+    <Button
+        android:id="@+id/Q6Ten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="More than 10 Flights"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Q6Three"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/Q6Next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Next"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <Button
+        android:id="@+id/Q6Back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Back"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/Q6Next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Q6Next" />
+
+    <TextView
+        android:id="@+id/Q6Response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/Q6None"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Q6" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
