@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout14"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey"
+    tools:context=".AnnualCarbon.ACQ16Fragment">
+
+    <Button
+        android:id="@+id/Q16Solar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Solar"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/Q16Oil"
+        app:layout_constraintStart_toStartOf="@id/Q16Oil"
+        app:layout_constraintTop_toBottomOf="@id/Q16Oil"
+        app:layout_constraintVertical_bias="0.30" />
+
+    <Button
+        android:id="@+id/Q16Electricity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Electricity"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/Q16Gas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/Q16Gas"
+        app:layout_constraintTop_toTopOf="@id/Q16Gas" />
+
+    <Button
+        android:id="@+id/Q16Next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Next"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.90"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.90" />
+
+    <TextView
+        android:id="@+id/Q16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="What type of energy do you use to heat water in your home?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <Button
+        android:id="@+id/Q16Gas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Natural Gas"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/Q16Electricity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Q16"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/Q16Other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Other"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/Q16Solar"
+        app:layout_constraintEnd_toEndOf="@id/Q16Propane"
+        app:layout_constraintStart_toStartOf="@id/Q16Propane"
+        app:layout_constraintTop_toTopOf="@id/Q16Solar" />
+
+    <Button
+        android:id="@+id/Q16Propane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Propane"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/Q16Oil"
+        app:layout_constraintEnd_toEndOf="@id/Q16Electricity"
+        app:layout_constraintStart_toStartOf="@id/Q16Electricity"
+        app:layout_constraintTop_toTopOf="@id/Q16Oil" />
+
+    <Button
+        android:id="@+id/Q16Oil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Oil"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/Q16Gas"
+        app:layout_constraintStart_toStartOf="@id/Q16Gas"
+        app:layout_constraintTop_toBottomOf="@id/Q16Gas"
+        app:layout_constraintVertical_bias="0.20" />
+
+    <Button
+        android:id="@+id/Q16Back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Back"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/Q16Next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Q16Next" />
+
+    <TextView
+        android:id="@+id/Q16Response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/Q16Gas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Q16" />
+</androidx.constraintlayout.widget.ConstraintLayout>

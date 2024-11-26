@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.b07demosummer2024.AnnualCarbon.AnnualCarbonActivity;
+
 public class NavigationActivity extends AppCompatActivity {
 
     public NavigationActivity() {
@@ -71,8 +73,15 @@ public class NavigationActivity extends AppCompatActivity {
         buttonNavCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(new SpinnerFragment());
-            } // TODO: Need to replace with the actual fragment once created
+                Intent myIntent = new Intent(NavigationActivity.this,
+                        AnnualCarbonActivity.class);
+                // clear activities before questionnaire
+                myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        | Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                NavigationActivity.this.startActivity(myIntent);
+                finish();
+            }
         });
 
         buttonNavProfile.setOnClickListener(new View.OnClickListener() {
