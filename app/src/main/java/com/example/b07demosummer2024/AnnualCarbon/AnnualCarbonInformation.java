@@ -1,11 +1,14 @@
 package com.example.b07demosummer2024.AnnualCarbon;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import android.app.Person;
+import android.content.Context;
+import android.util.Log;
 
-public abstract class AnnualCarbonInformation{
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class AnnualCarbonInformation{
      static int[] PersonalVehicleUse = new int[3];
      static String[] PVU = new String[3];
      static int[] PublicTransportation = new int[2];
@@ -20,15 +23,15 @@ public abstract class AnnualCarbonInformation{
      static String[] H = new String[7];
      static int[] Consumption = new int[4];
      static String[] C = new String[4];
-     static FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-
-     static FirebaseUser user = firebaseAuth.getCurrentUser();
-     public static String uid = user.getUid();
-     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-     public AnnualCarbonInformation(){
+     static Context context;
+     //static FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+     //static FirebaseUser user = firebaseAuth.getCurrentUser();
+     //public static String uid = user.getUid();
+     //DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+     public AnnualCarbonInformation(Context context){
+          this.context = context;
      }
-
-     public static double transportationCalc(){
+     public double transportationCalc(){
           double total = 0;
           //PVU Calculation
           if (PersonalVehicleUse[0] == 1){
@@ -100,10 +103,11 @@ public abstract class AnnualCarbonInformation{
                          total += fish[i - 1];
                     }
                }
-          } else{
+          }
+          else{
                double[] nonMeat = {1000, 500, 1500};
                for (int i = 1; i <= 3; i++) {
-                    if (Food[1] == i) {
+                    if (Food[0] == i) {
                          total += nonMeat[i - 1];
                     }
                }
@@ -117,10 +121,63 @@ public abstract class AnnualCarbonInformation{
           return total;
      }
 
-     public double housingCalc(){
-          return 0;
+     public double housingCalc() {
+         double total = 0;
+         String[][] data = {{"detached_u1000.csv", "detached_1000_2000.csv", "detached_o2000.csv"},
+                 {"semidetached_u1000.csv", "semidetached_1000_2000.csv", "semidetached_o2000.csv"},
+                 {"townhouse_u1000.csv", "townhouse_1000_2000.csv", "townhouse_o2000.csv"},
+                 {"condo_apartment_u1000.csv", "condo_apartment1000_2000.csv", "condo_apartment_o2000.csv"}};
+         double[][] dataArray = new double[4][25];
+         int houseType = Housing[0];
+         int houseSize = Housing[2];
+         if (houseType == 5){
+              houseType = 3;
+         }
+         InputStreamReader is;
+         try {
+             is = new InputStreamReader(context.getAssets().open(data[houseType - 1][houseSize - 1]));
+         } catch (IOException e) {
+             throw new RuntimeException(e);
+         }
+         BufferedReader reader = new BufferedReader(is);
+         int row = 0;
+         String line;
+         try {
+             while ((line = reader.readLine()) != null) {
+                 String[] tokens = line.split(",");
+                 for (int i = 0; i < tokens.length; i++) {
+                     dataArray[row][i] = Double.parseDouble(tokens[i]);
+                 }
+                 row++;
+             }
+         } catch (Exception e) {
+             Log.wtf("AnnualCarbonInformation", "Error reading data", e);
+             e.printStackTrace();
+         }
+         int gas;
+         int water;
+         if (Housing[3] == 6) {
+             gas = 1;
+         } else {
+             gas = Housing[3];
+         }
+         if (Housing[5] == 6) {
+             water = 1;
+         } else {
+             water = Housing[5];
+         }
+         total += dataArray[Housing[1] - 1][gas + 5 * (Housing[4] -1) - 1]
+                 + dataArray[Housing[1] - 1][water + 5 * (Housing[4] - 1) - 1];
+         if (Housing[3] == Housing[5]) {
+             total -= 233;
+         }
+         if (Housing[6] == 1) {
+             total -= 6000;
+         } else if (Housing[6] == 2) {
+             total -= 4000;
+         }
+         return total;
      }
-
      public double consumptionCalc(){
           double total = 0; //Total consumption
           int[] clothes = {360, 120, 100, 5}; //Clothes question quantities
@@ -185,12 +242,35 @@ public abstract class AnnualCarbonInformation{
           }
           return total;
      }
-
-     public void addToDatabase(){
-          double transTotal = transportationCalc();
-          double foodTotal = foodCalc();
-          double housingTotal = housingCalc();
-          double consumptionTotal = consumptionCalc();
-          double total = transTotal + foodTotal + housingTotal + consumptionTotal;
+     public double totalCalc(){
+          double total = transportationCalc() + foodCalc() + housingCalc() + consumptionCalc();
+          total = total * 1000;
+          int intTotal = (int) total;
+          double total2 = (double) intTotal;
+          total2 = total2 / 1000;
+          return total2;
      }
+
+     public String getCarType(){
+         if (PersonalVehicleUse[0] == 2){
+             return "N/A";
+         }
+         String[] types = {"Gasoline", "Diesel", "Hybrid", "Electric", "I don't know"};
+         return types[PersonalVehicleUse[1] - 1];
+     }
+
+     public String getFoodWaste(){
+         String[] howOften = {"Never", "Rarely", "Occasionally", "Frequently"};
+         return howOften[Food[5] - 1];
+     }
+     public String getBuyEcoClothes(){
+         String[] answers = {"regularly", "occasionally", "no"};
+         return answers[Consumption[1] - 1];
+     }
+
+     public String getHowOftenRecycle(){
+         String[] answers = {"Never", "Occasionally", "Frequently", "Always"};
+         return answers[Consumption[3] - 1];
+     }
+
 }

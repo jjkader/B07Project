@@ -82,7 +82,7 @@ public class ACQ21Fragment extends LoadFragment {
             @Override
             public void onClick(View V){
                 if (AnnualCarbonInformation.Consumption[3] != 0){
-                    // loadFragment(new ACQFinishFragment());
+                    loadFragment(new CarbonCalculationsFragment());
                 }
             }
         });

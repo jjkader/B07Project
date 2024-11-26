@@ -55,7 +55,7 @@ public class ACQ17Fragment extends LoadFragment {
         no.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
-                AnnualCarbonInformation.Housing[6] = 1;
+                AnnualCarbonInformation.Housing[6] = 3;
                 AnnualCarbonInformation.H[6] = "No";
                 set(textview, AnnualCarbonInformation.Housing, AnnualCarbonInformation.H, 6);
             }
