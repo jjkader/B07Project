@@ -1,6 +1,8 @@
 package com.example.b07demosummer2024.DailyActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -81,7 +84,6 @@ public class ChangeDayActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_change_day_activity, container, false);
-        // TODO: Access database to find activities done on this day
 
         Date = (TextView) view.findViewById(R.id.textDate);
         String formatted_date = year + "-" + (month+1) + "-" + day;
@@ -106,9 +108,19 @@ public class ChangeDayActivityFragment extends Fragment {
         otherType = (EditText) view.findViewById(R.id.editOtherType);
         numOther = (EditText) view.findViewById(R.id.editNumOther);
 
+        ImageButton logo = (ImageButton) view.findViewById(R.id.planetzeLogo);
+
+        logo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://planetze.io/"));
+                startActivity(browserIntent);
+            }
+        });
+
         submitChanges.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                DatabaseReference userRef = DailyTrackingActivity.userRef;
+                DatabaseReference userDailyActivityRef = DailyTrackingActivity.userDailyActivityRef;
 
                 Map<String, Map<String, Object>> updatedActivity = new HashMap<>();
                 String haul_type;
@@ -201,7 +213,6 @@ public class ChangeDayActivityFragment extends Fragment {
                     }
                 }
 
-                // TODO: use factor to change miles to kilometers
                 User.addDailyActivity(updatedActivity, formatted_date, Double.toString(personal_dist),
                         Double.toString(public_time), Double.toString(walk_dist), Integer.toString(num_flights), haul_type,
                         Integer.toString(num_beef), Integer.toString(num_pork), Integer.toString(num_chicken),
@@ -210,7 +221,7 @@ public class ChangeDayActivityFragment extends Fragment {
 
                 Map<String, Object> updatedDateActivity = updatedActivity.get(formatted_date);
 
-                userRef.child(formatted_date).updateChildren(updatedDateActivity);
+                userDailyActivityRef.child(formatted_date).updateChildren(updatedDateActivity);
 
                 getParentFragmentManager().popBackStackImmediate();
             }

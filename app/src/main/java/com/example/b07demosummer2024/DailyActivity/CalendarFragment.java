@@ -1,5 +1,7 @@
 package com.example.b07demosummer2024.DailyActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.b07demosummer2024.R;
@@ -82,6 +85,16 @@ public class CalendarFragment extends Fragment {
         editActivities = (Button) view.findViewById(R.id.editDayActivity);
         editEnergyBill = (Button) view.findViewById(R.id.editEnergyBill);
 
+        ImageButton logo = (ImageButton) view.findViewById(R.id.planetzeLogo);
+
+        logo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://planetze.io/"));
+                startActivity(browserIntent);
+            }
+        });
+
         // Set Current Date
         setDate();
 
@@ -112,7 +125,8 @@ public class CalendarFragment extends Fragment {
 
         editEnergyBill.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                // TODO: Change energy bill for user (need it added to database first)
+                Fragment fragment = ChangeEnergyBill.newInstance(year, month);
+                loadFragment(fragment);
             }
         });
 

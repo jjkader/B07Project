@@ -23,7 +23,8 @@ public class DailyTrackingActivity extends AppCompatActivity {
 
     public static FirebaseUser user = auth.getCurrentUser();
     public static String uid = user.getUid();
-    public static DatabaseReference userRef = db.child("users").child(uid).child("daily_activity");
+    public static DatabaseReference userRef = db.child("users").child(uid);
+    public static DatabaseReference userDailyActivityRef = userRef.child("dailyActivity");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

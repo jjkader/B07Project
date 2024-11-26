@@ -10,7 +10,7 @@ public class User {
     public String lastname;
     public String email;
     public String password;
-    public Map<String, Map<String, Map<String,String>>> daily_activity;
+    public Map<String, Map<String, Map<String,String>>> dailyActivity;
     public User(){
 
     }
@@ -27,39 +27,39 @@ public class User {
             {"clothes": num_clothes, "electronics": num_electronics, "other": num_other}
         ];
         */
-        daily_activity = new HashMap<>();
+        dailyActivity = new HashMap<>();
     }
-    public static void addDailyActivity(Map<String, Map<String, Object>> daily_activity,
-                                        String date, String personal_dist, String public_time, String walk_dist,
-                                        String num_flights, String haul, String num_beef, String num_pork,
-                                        String num_chicken, String num_fish, String num_plant, String num_clothes,
-                                        String num_electronics, String other_type, String num_other) {
+    public static void addDailyActivity(Map<String, Map<String, Object>> dailyActivity,
+                                        String date, String personalDist, String publicTime, String walkDist,
+                                        String numFlights, String haul, String numBeef, String numPork,
+                                        String numChicken, String numFish, String numPlant, String numClothes,
+                                        String numElectronics, String otherType, String numOther) {
         Map<String, String> transportation = new HashMap<>();
-        transportation.put("personal", personal_dist);
-        transportation.put("public", public_time);
-        transportation.put("walk", walk_dist);
-        transportation.put("flight_num", num_flights);
-        transportation.put("flight_type", haul);
+        transportation.put("personal", personalDist);
+        transportation.put("public", publicTime);
+        transportation.put("walk", walkDist);
+        transportation.put("flightNum", numFlights);
+        transportation.put("flightType", haul);
 
         Map<String, String> food = new HashMap<>();
-        food.put("beef", num_beef);
-        food.put("pork", num_pork);
-        food.put("chicken", num_chicken);
-        food.put("fish", num_fish);
-        food.put("plant", num_plant);
+        food.put("beef", numBeef);
+        food.put("pork", numPork);
+        food.put("chicken", numChicken);
+        food.put("fish", numFish);
+        food.put("plant", numPlant);
 
         Map<String, String> consumption = new HashMap<>();
-        consumption.put("clothes", num_clothes);
-        consumption.put("electronics", num_electronics);
-        consumption.put("other_type", other_type);
-        consumption.put("other", num_other);
+        consumption.put("clothes", numClothes);
+        consumption.put("electronics", numElectronics);
+        consumption.put("otherType", otherType);
+        consumption.put("other", numOther);
 
         Map<String,Object> info = new HashMap<>();
         info.put("transportation", transportation);
         info.put("food", food);
         info.put("consumption", consumption);
 
-        daily_activity.put(date, info);
+        dailyActivity.put(date, info);
     }
 }
 
