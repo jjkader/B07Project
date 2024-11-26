@@ -264,7 +264,7 @@ public class AnnualCarbonInformation{
          return howOften[Food[5] - 1];
      }
      public String getBuyEcoClothes(){
-         String[] answers = {"regularly", "occasionally", "no"};
+         String[] answers = {"Regularly", "Occasionally", "No"};
          return answers[Consumption[1] - 1];
      }
 
