@@ -267,10 +267,44 @@ public class AnnualCarbonInformation{
          String[] answers = {"Regularly", "Occasionally", "No"};
          return answers[Consumption[1] - 1];
      }
-
      public String getHowOftenRecycle(){
          String[] answers = {"Never", "Occasionally", "Frequently", "Always"};
          return answers[Consumption[3] - 1];
      }
 
+     public String getHomeType(){
+         String[] answers = {"Detached house", "Semi-detached house", "Townhouse",
+                 "Condo/Apartment", "Other"};
+         return answers[Housing[0] - 1];
+     }
+
+    public String getNumInHome(){
+        String[] answers = {"1", "2", "3-4", "5 or more"};
+        return answers[Housing[1] - 1];
+    }
+
+    public String getHomeSize(){
+        String[] answers = {"Under 1000 sq. ft.", "1000-2000 sq. ft.", "Over 2000 sq. ft."};
+        return answers[Housing[2] - 1];
+    }
+
+    public String getHeatEnergy(){
+        String[] answers = {"Natural Gas", "Electricity", "Oil", "Propane", "Wood", "Other"};
+        return answers[Housing[3] - 1];
+    }
+
+    public String getAverageBill(){
+        String[] answers = {"Under $50", "$50-$100", "$100-$150", "$150-$200", "Over $200"};
+        return answers[Housing[4] - 1];
+    }
+
+    public String getWaterType(){
+        String[] answers = {"Natural Gas", "Electricity", "Oil", "Propane", "Solar", "Other"};
+        return answers[Housing[5] - 1];
+    }
+
+    public String getUseRenewable(){
+        String[] answers = {"Primarily", "Partially", "No"};
+        return answers[Housing[6] - 1];
+    }
 }

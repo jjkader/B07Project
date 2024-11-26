@@ -65,7 +65,13 @@ public class CarbonCalculationsFragment extends LoadFragment {
         data.put("carType", aci.getCarType());
         data.put("foodWaste", aci.getFoodWaste());
         data.put("buyEcoClothes", aci.getBuyEcoClothes());
-        data.put("howOftenRecycle", aci.getHowOftenRecycle());
+        data.put("homeType", aci.getHomeType());
+        data.put("numInHome", aci.getNumInHome());
+        data.put("homeSize", aci.getHomeSize());
+        data.put("heatEnergy", aci.getHeatEnergy());
+        data.put("averageBill", aci.getAverageBill());
+        data.put("waterType", aci.getWaterType());
+        data.put("useRenewable", aci.getUseRenewable());
         data.put("transportEmis", Double.toString(aci.transportationCalc()));
         data.put("foodEmis", Double.toString(aci.foodCalc()));
         data.put("houseEmis", Double.toString(aci.housingCalc()));
