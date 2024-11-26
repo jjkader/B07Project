@@ -5,6 +5,7 @@
     android:id="@+id/IntroToCalcLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_grey"
     tools:context=".AnnualCarbon.IntroToCalc">
 
     <!-- TODO: Update blank fragment layout -->
@@ -38,6 +39,7 @@
         android:id="@+id/IntroContinue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

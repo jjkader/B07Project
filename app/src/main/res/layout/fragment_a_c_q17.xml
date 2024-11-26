@@ -5,7 +5,8 @@
     android:id="@+id/frameLayout15"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AnnualCarbon.ACQ17Fragment" >
+    android:background="@color/light_grey"
+    tools:context=".AnnualCarbon.ACQ17Fragment">
 
     <TextView
         android:id="@+id/Q17Legend"
@@ -24,6 +25,7 @@
         android:id="@+id/Q17Back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Back"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@id/Q17Next"
@@ -51,6 +53,7 @@
         android:id="@+id/Q17Prim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Yes, primarily"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,6 +66,7 @@
         android:id="@+id/Q17Part"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Yes, partially"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/Q17Prim"
@@ -74,6 +78,7 @@
         android:id="@+id/Q17Next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Next"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,6 +92,7 @@
         android:id="@+id/Q17No"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="No"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

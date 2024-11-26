@@ -5,12 +5,14 @@
     android:id="@+id/frameLayout17"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AnnualCarbon.ACQ19Fragment" >
+    android:background="@color/light_grey"
+    tools:context=".AnnualCarbon.ACQ19Fragment">
 
     <Button
         android:id="@+id/Q19Occ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Yes, occasionally"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/Q19Reg"
@@ -36,6 +38,7 @@
         android:id="@+id/Q19Reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Yes, regularly"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,6 +51,7 @@
         android:id="@+id/Q19Next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Next"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,6 +65,7 @@
         android:id="@+id/Q19Back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Back"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@id/Q19Next"
@@ -74,6 +79,7 @@
         android:id="@+id/Q19No"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="No"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

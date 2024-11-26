@@ -5,12 +5,14 @@
     android:id="@+id/frameLayout11"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AnnualCarbon.ACQ13Fragment" >
+    android:background="@color/light_grey"
+    tools:context=".AnnualCarbon.ACQ13Fragment">
 
     <Button
         android:id="@+id/Q13OTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Over 2000"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,6 +25,7 @@
         android:id="@+id/Q13UOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Under 1000"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,6 +38,7 @@
         android:id="@+id/Q13Next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Next"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,6 +66,7 @@
         android:id="@+id/Q13OneTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="1000-2000"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/Q13UOne"
@@ -73,6 +78,7 @@
         android:id="@+id/Q13Back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
         android:text="Back"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@id/Q13Next"

@@ -49,11 +49,11 @@ public class CarbonCalculationsFragment extends LoadFragment {
 
 
         AnnualCarbonInformation aci = new AnnualCarbonInformation(getContext());
-        String transEmissions = (aci.transportationCalc()) + "kg";
-        String foodEmissions = (aci.foodCalc()) + "kg";
-        String houseEmissions = (aci.housingCalc()) + "kg";
-        String consumpEmissions = (aci.consumptionCalc()) + "kg";
-        String totalEmissions = (aci.totalCalc()) + "kg";
+        String transEmissions = (aci.transportationCalc()) + " kg";
+        String foodEmissions = (aci.foodCalc()) + " kg";
+        String houseEmissions = (aci.housingCalc()) + " kg";
+        String consumpEmissions = (aci.consumptionCalc()) + " kg";
+        String totalEmissions = (aci.totalCalc()) + " kg";
 
         totalTransportation.setText(transEmissions);
         totalHousing.setText(houseEmissions);
