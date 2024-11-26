@@ -15,10 +15,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.b07demosummer2024.AnnualCarbon.AnnualCarbonActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.DataSnapshot;
@@ -69,12 +71,42 @@ public class LoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                    // TODO: If user is new, send to setup questions, otherwise send to navigation
-                                    Intent myIntent = new Intent(LoginActivity.this, NavigationActivity.class);
-                                    // clear activities before NavigationActivity
-                                    myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    LoginActivity.this.startActivity(myIntent);
-                                    finish();
+                                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                                    FirebaseUser user = auth.getCurrentUser();
+                                    String uid = user.getUid();
+                                    DatabaseReference db = FirebaseDatabase.getInstance(
+                                            "https://b07project-725cc-default-rtdb.firebaseio.com/")
+                                            .getReference();
+                                    DatabaseReference userRef = db.child("users").child(uid);
+
+                                    userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.exists()) {
+                                                DataSnapshot yearlyData = snapshot.child("Yearly Data");
+                                                if (yearlyData.exists()) {
+                                                    // Returning user, send to navigation
+                                                    openNavigation();
+                                                } else {
+                                                    // no annual data
+                                                    openAnnualCarbon();
+                                                }
+                                            } else {
+                                                // no user data (should not occur)
+                                                openAnnualCarbon();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Toast.makeText(LoginActivity.this,
+                                                    "Error Authenticating User", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+
+
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Invalid email or password",
                                             Toast.LENGTH_SHORT).show();
@@ -99,7 +131,6 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()) {
-                                        // TODO: Send the user a reset password email
                                         resetPassword();
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Email does not exist", Toast.LENGTH_SHORT).show();
@@ -113,6 +144,28 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void openAnnualCarbon() {
+        Intent myIntent = new Intent(LoginActivity.this,
+                AnnualCarbonActivity.class);
+        // clear activities before questionnaire
+        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        LoginActivity.this.startActivity(myIntent);
+        finish();
+    }
+
+    private void openNavigation() {
+        Intent myIntent = new Intent(
+                LoginActivity.this, NavigationActivity.class);
+        // clear activities before NavigationActivity
+        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        LoginActivity.this.startActivity(myIntent);
+        finish();
     }
 
     private boolean checkFields() {

@@ -367,10 +367,10 @@ public class EcoTrackerHomeFragment extends Fragment {
                             wasteFactor = 23.4 / 1095;
                         }
                         double beefCO2, porkCO2, chickenCO2, fishCO2;
-                        beefCO2 = (numBeef * 2500 / (double) 365) - (numBeef * wasteFactor);
-                        porkCO2 = (numPork * 1450 / (double) 365) - (numPork * wasteFactor);
-                        chickenCO2 = (numChicken * 950 / (double) 365) - (numChicken * wasteFactor);
-                        fishCO2 = (numFish * 800 / (double) 365) - (numFish * wasteFactor);
+                        beefCO2 = (numBeef * 2500 / (double) 365) + (numBeef * wasteFactor);
+                        porkCO2 = (numPork * 1450 / (double) 365) + (numPork * wasteFactor);
+                        chickenCO2 = (numChicken * 950 / (double) 365) + (numChicken * wasteFactor);
+                        fishCO2 = (numFish * 800 / (double) 365) + (numFish * wasteFactor);
 
                         String beefCO2Str = df.format(beefCO2) + unit;
                         String porkCO2Str = df.format(porkCO2) + unit;

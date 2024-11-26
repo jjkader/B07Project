@@ -35,6 +35,10 @@
             android:exported="true"></activity>
 >>>>>>> Stashed changes
         <activity
+            android:name=".AnnualCarbon.AnnualCarbonActivity"
+            android:exported="true" >
+        </activity>
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
