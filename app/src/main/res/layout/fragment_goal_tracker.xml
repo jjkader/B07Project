@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< Updated upstream
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,3 +13,180 @@
         android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>
+=======
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ecoHub"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A9BCD0"
+    tools:context=".DailyActivity.GoalTrackerFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:textSize="30sp"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:textColor="#1b1b1e"
+        android:text="Eco Goal Progress"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:indeterminate="false"
+        android:indeterminateTint="#000000"
+        android:progress="0"
+        android:progressTint="#009999"
+        app:layout_constraintBottom_toTopOf="@+id/percentage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/percentage"
+        android:textSize="50sp"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:textColor="#009999"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="50dp"
+        android:text="0%"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+    <TextView
+        android:id="@+id/searchBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:textColor="#1b1b1e"
+        android:text="Check off the habits you've completed today!"
+        app:layout_constraintTop_toBottomOf="@id/percentage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <CheckBox
+        android:fontFamily="monospace"
+        android:textColor="#1b1b1e"
+        android:id="@+id/goal1"
+        android:onClick="onCheckBoxClicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Used public transport"
+        app:layout_constraintBottom_toTopOf="@+id/goal2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"/>
+    <CheckBox
+        android:fontFamily="monospace"
+        android:textColor="#1b1b1e"
+        android:id="@+id/goal2"
+        android:onClick="onCheckBoxClicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Used a reusable bottle"
+        app:layout_constraintBottom_toTopOf="@+id/goal3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal1"
+        />
+    <CheckBox
+        android:fontFamily="monospace"
+        android:textColor="#1b1b1e"
+        android:id="@+id/goal3"
+        android:onClick="onCheckBoxClicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ate plant-based and non-GMO foods"
+        app:layout_constraintBottom_toTopOf="@+id/goal4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal2"/>
+    <CheckBox
+        android:fontFamily="monospace"
+        android:textColor="#1b1b1e"
+        android:id="@+id/goal4"
+        android:layout_width="wrap_content"
+        android:onClick="onCheckBoxClicked"
+        android:layout_height="wrap_content"
+        android:text="Used wooden cutlery that can be composted"
+        app:layout_constraintBottom_toTopOf="@+id/goal5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal3"/>
+    <CheckBox
+        android:fontFamily="monospace"
+        android:textColor="#1b1b1e"
+        android:textAlignment="center"
+        android:id="@+id/goal5"
+        android:layout_width="wrap_content"
+        android:onClick="onCheckBoxClicked"
+        android:layout_height="wrap_content"
+        android:text="Thrifted when clothes and furniture shopping"
+        app:layout_constraintBottom_toTopOf="@+id/goal6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal4"
+        />
+    <CheckBox
+        android:fontFamily="monospace"
+        android:textColor="#1b1b1e"
+        android:id="@+id/goal6"
+        android:onClick="onCheckBoxClicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reduced water usage"
+        app:layout_constraintBottom_toTopOf="@+id/goal7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal5"
+        />
+    <CheckBox
+        android:fontFamily="monospace"
+        android:textColor="#1b1b1e"
+        android:id="@+id/goal7"
+        android:onClick="onCheckBoxClicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Donated older clothes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal6"
+        />
+    <Button
+        android:id="@+id/backButton"
+        android:text="See Eco Tracker"
+        android:textColor="#d8dbe2"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:backgroundTint="#009999"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal7"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> Stashed changes

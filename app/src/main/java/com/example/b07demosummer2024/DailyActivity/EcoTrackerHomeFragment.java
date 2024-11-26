@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.b07demosummer2024.NavigationActivity;
 import com.example.b07demosummer2024.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +35,7 @@ public class EcoTrackerHomeFragment extends Fragment {
     private static final String ARG_PARAM3 = "day";
     private static final DecimalFormat df = new DecimalFormat("0.00");
     int year, month, day;
-    Button openCalendar, editTodaysActivity;
+    Button openCalendar, editTodaysActivity, viewGoals;
     TextView date, textPersonalDist, textPublicTime, textWalkDist, textFlight, textBeef, textPork, textChicken, textFish, textPlant,
             textNumServings, textNumClothes, textNumElectronics, textNumOther;
     TextView textPersonalCO2, textPublicCO2, textWalkCO2, textFlightCO2, textBeefCO2, textPorkCO2, textChickenCO2, textFishCO2,
@@ -87,6 +88,7 @@ public class EcoTrackerHomeFragment extends Fragment {
 
         openCalendar = (Button) view.findViewById(R.id.openCalendar);
         editTodaysActivity = (Button) view.findViewById(R.id.editTodayActivity);
+        viewGoals = (Button) view.findViewById(R.id.viewGoals);
 
         date = (TextView) view.findViewById(R.id.textDate);
         textPersonalDist = (TextView) view.findViewById(R.id.textPersonalDist);
@@ -151,6 +153,13 @@ public class EcoTrackerHomeFragment extends Fragment {
             public void onClick(View v) {
                 Fragment fragment = ChangeDayActivityFragment.newInstance(year, month, day);
                 loadFragment(fragment);
+            }
+        });
+        viewGoals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(getActivity(), GoalPicker.class);
+                getActivity().startActivity(myIntent);
             }
         });
 

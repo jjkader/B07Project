@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 package com.example.b07demosummer2024.DailyActivity;
+=======
+package com.example.b07demosummer2024;
+>>>>>>> Stashed changes
 
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
@@ -11,7 +15,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+<<<<<<< Updated upstream
 import com.example.b07demosummer2024.R;
+=======
+import com.example.b07demosummer2024.DailyActivity.GoalPicker;
+>>>>>>> Stashed changes
 
 public class GoalReminder extends BroadcastReceiver {
     @SuppressLint({"NotificationPermission", "MissingPermission"})
