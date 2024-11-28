@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/habitrecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="773dp"
+        android:layout_below="@+id/shoppingFilter"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="-68dp" />
+
+    <SearchView
+        android:id="@+id/habitsearchView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="18dp" />
+
+    <CheckBox
+        android:id="@+id/transportFilter"
+        android:layout_width="155dp"
+        android:layout_height="22dp"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="1dp"
+        android:text="Transportation" />
+
+    <CheckBox
+        android:id="@+id/foodFilter"
+        android:layout_width="155dp"
+        android:layout_height="22dp"
+        android:layout_below="@+id/transportFilter"
+        android:layout_marginTop="0dp"
+        android:text="Food" />
+
+    <CheckBox
+        android:id="@+id/electricityFilter"
+        android:layout_width="155dp"
+        android:layout_height="22dp"
+        android:layout_below="@+id/foodFilter"
+        android:layout_marginTop="0dp"
+        android:text="Electricity" />
+
+    <CheckBox
+        android:id="@+id/shoppingFilter"
+        android:layout_width="155dp"
+        android:layout_height="22dp"
+        android:layout_below="@+id/electricityFilter"
+        android:layout_marginTop="0dp"
+        android:text="Shopping" />
+
+    <CheckBox
+        android:id="@+id/smallFilter"
+        android:layout_width="155dp"
+        android:layout_height="22dp"
+        android:layout_below="@+id/textView2"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/foodFilter"
+        android:text="Small" />
+
+    <CheckBox
+        android:id="@+id/largeFilter"
+        android:layout_width="155dp"
+        android:layout_height="22dp"
+        android:layout_below="@+id/mediumFilter"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/foodFilter"
+        android:text="Large" />
+
+    <CheckBox
+        android:id="@+id/mediumFilter"
+        android:layout_width="155dp"
+        android:layout_height="22dp"
+        android:layout_below="@+id/smallFilter"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/foodFilter"
+        android:text="Medium" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="155dp"
+        android:layout_height="22dp"
+        android:layout_below="@+id/habitsearchView"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="1dp"
+        android:layout_toEndOf="@+id/textView3"
+        android:text="  Impact Levels:" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="155dp"
+        android:layout_height="22dp"
+        android:layout_below="@+id/habitsearchView"
+        android:layout_marginTop="0dp"
+        android:text="   Habit Type:" />
+
+    <Button
+        android:id="@+id/filterButton"
+        android:layout_width="116dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/largeFilter"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/shoppingFilter"
+        android:text="Filter" />
+
+</RelativeLayout>

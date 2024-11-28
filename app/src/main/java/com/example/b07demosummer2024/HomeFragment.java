@@ -59,7 +59,11 @@ public class HomeFragment extends Fragment {
 
         buttonManageItems.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { loadFragment(new ManageItemsFragment());}
+            public void onClick(View v) {
+                Intent myIntent = new Intent(view.getContext(), HabitSearchActivity.class);
+                view.getContext().startActivity(myIntent);
+                //loadFragment(new ManageItemsFragment());
+            }
         });
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
