@@ -24,10 +24,7 @@ public class AnnualCarbonInformation{
      static int[] Consumption = new int[4];
      static String[] C = new String[4];
      static Context context;
-     //static FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-     //static FirebaseUser user = firebaseAuth.getCurrentUser();
-     //public static String uid = user.getUid();
-     //DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+     static String country;
      public AnnualCarbonInformation(Context context){
           this.context = context;
      }
@@ -306,5 +303,9 @@ public class AnnualCarbonInformation{
     public String getUseRenewable(){
         String[] answers = {"Primarily", "Partially", "No"};
         return answers[Housing[6] - 1];
+    }
+
+    public void setCountry(String country){
+         this.country = country;
     }
 }

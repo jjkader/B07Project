@@ -1,27 +1,27 @@
 package com.example.b07demosummer2024.AnnualCarbon;
 
+import static java.lang.Double.parseDouble;
+
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.b07demosummer2024.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,15 +40,36 @@ public class CarbonCalculationsFragment extends LoadFragment {
         TextView totalFood = view.findViewById(R.id.foodCalc);
         TextView totalHousing = view.findViewById(R.id.houseCalc);
         TextView totalConsumption = view.findViewById(R.id.consumpCalc);
+        TextView countryDisplay = view.findViewById(R.id.countrySelected);
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         String uid = user.getUid();
         FirebaseDatabase fdb = FirebaseDatabase.getInstance(
                 "https://b07project-725cc-default-rtdb.firebaseio.com/");
         DatabaseReference reference = fdb.getReference().child("users").child(uid);
-
-
         AnnualCarbonInformation aci = new AnnualCarbonInformation(getContext());
+
+        HashMap<String, Double> countriesMap = new HashMap<>();
+        populateCountryMap(getContext(), countriesMap);
+        String country = aci.country;
+        long totalUserEmis = (long) aci.totalCalc() / 1000;
+        long percent =  (long) (totalUserEmis / countriesMap.get(country) * 100);
+        percent = Math.round(percent);
+        if (percent < 100){
+            String text = "You are " + Double.toString(percent) + "% " +
+                    "below " + country + " carbon emissions per capita";
+            countryDisplay.setText(text);
+        } else if (percent == 100){
+            String text = "You are on par with " + country +
+                    " carbon emissions per capita ";
+            countryDisplay.setText(text);
+        } else{
+            String text = "You are " + Double.toString(percent) + "% " +
+                    "above " + country + " carbon emissions per capita";
+            countryDisplay.setText(text);
+        }
+
         String transEmissions = (aci.transportationCalc()) + " kg";
         String foodEmissions = (aci.foodCalc()) + " kg";
         String houseEmissions = (aci.housingCalc()) + " kg";
@@ -78,6 +99,29 @@ public class CarbonCalculationsFragment extends LoadFragment {
         data.put("consumpEmis", Double.toString(aci.consumptionCalc()));
         data.put("totalEmis", Double.toString(aci.totalCalc()));
         reference.child("Yearly Data").updateChildren(data);
+
         return view;
     }
+
+    public void populateCountryMap(Context context, HashMap<String, Double> map){
+        InputStreamReader is;
+        try {
+            is = new InputStreamReader(context.getAssets().open("globalAvg.csv"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BufferedReader reader = new BufferedReader(is);
+        try{
+            String line = reader.readLine();
+            while ((line = reader.readLine()) != null){
+                String[] tokens = line.split(",");
+                String country = tokens[0];
+                Double emissions = parseDouble(tokens[1]);
+                map.put(country, emissions);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+
