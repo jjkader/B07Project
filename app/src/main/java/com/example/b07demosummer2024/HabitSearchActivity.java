@@ -65,9 +65,9 @@ public class HabitSearchActivity extends AppCompatActivity {
             }
         });
 
-        habits.add(new Habit("1","Transportation","large","Did you run walk or bike to work?","Walking and biking to work daily.", false, R.drawable.transport_habit));
+        habits.add(new Habit("1","Transportation","large","Did you run walk or bike to work?","Walking and biking to work daily.", true, R.drawable.transport_habit));
         habits.add(new Habit("2","Transportation","medium","Did you take the bus to work?","Taking the bus to work daily.", false, R.drawable.transport_habit));
-        habits.add(new Habit("3","Transportation","small","Did you run carpool to work?","Carpooling with colleagues to work daily.", false, R.drawable.transport_habit));
+        habits.add(new Habit("3","Transportation","small","Did you run carpool to work?","Carpooling with colleagues to work daily.", true, R.drawable.transport_habit));
         habits.add(new Habit("4","Food","small","Did you eat BLAH BLAH today?","Eating BLAH BLAH daily.", false,R.drawable.transport_habit));
         habits.add(new Habit("5","Food","medium","Did you eat BLAH today?","Eating BLAH daily.", false, R.drawable.transport_habit));
         habits.add(new Habit("1","Transportation","large","Did you run walk or bike to work?","Walking and biking to work daily.", false, R.drawable.transport_habit));

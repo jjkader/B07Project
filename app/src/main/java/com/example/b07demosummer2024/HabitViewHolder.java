@@ -2,6 +2,7 @@ package com.example.b07demosummer2024;
 
 import android.media.Image;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ public class HabitViewHolder extends RecyclerView.ViewHolder {
 
     ImageView imageView;
     TextView typeView, impactView, descriptionView;
+    CheckBox activeView;
 
     public HabitViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -19,5 +21,6 @@ public class HabitViewHolder extends RecyclerView.ViewHolder {
         typeView = itemView.findViewById(R.id.type);
         impactView = itemView.findViewById(R.id.impact);
         descriptionView = itemView.findViewById(R.id.description);
+        activeView = itemView.findViewById(R.id.selectHabit);
     }
 }

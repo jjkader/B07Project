@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/type"
-        android:layout_width="361dp"
+        android:layout_width="264dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/description"
         android:layout_marginStart="2dp"
@@ -36,14 +36,14 @@
 
     <TextView
         android:id="@+id/impact"
-        android:layout_width="362dp"
+        android:layout_width="265dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/type"
         android:layout_marginStart="1dp"
         android:layout_marginTop="4dp"
         android:layout_toEndOf="@+id/imageview"
         android:textColor="@color/black"
-        tools:text="Type"
+        tools:text="Impact"
         tools:textSize="10dp" />
 
     <LinearLayout
@@ -54,6 +54,16 @@
         android:layout_marginTop="4dp"
         android:background="#DAD8D8"
         android:orientation="horizontal" />
+
+    <CheckBox
+        android:id="@+id/selectHabit"
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:layout_below="@+id/description"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="1dp"
+        android:layout_toEndOf="@+id/type"
+        android:text="" />
 
 
 </RelativeLayout>
