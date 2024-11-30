@@ -25,6 +25,9 @@ public class DailyTrackingActivity extends AppCompatActivity {
     public static String uid = user.getUid();
     public static DatabaseReference userRef = db.child("users").child(uid);
     public static DatabaseReference userDailyActivityRef = userRef.child("dailyActivity");
+    public static DatabaseReference userWeeklyActivityRef = userRef.child("weeklyActivity");
+    public static DatabaseReference userMonthlyActivityRef = userRef.child("monthlyActivity");
+    public static DatabaseReference userYearlyActivityRef = userRef.child("Yearly Data");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

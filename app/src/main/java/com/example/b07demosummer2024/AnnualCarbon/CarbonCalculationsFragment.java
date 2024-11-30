@@ -1,5 +1,6 @@
 package com.example.b07demosummer2024.AnnualCarbon;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,9 +10,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.b07demosummer2024.LoginActivity;
+import com.example.b07demosummer2024.NavigationActivity;
 import com.example.b07demosummer2024.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,6 +44,9 @@ public class CarbonCalculationsFragment extends LoadFragment {
         TextView totalFood = view.findViewById(R.id.foodCalc);
         TextView totalHousing = view.findViewById(R.id.houseCalc);
         TextView totalConsumption = view.findViewById(R.id.consumpCalc);
+
+        Button mainMenu = view.findViewById(R.id.mainMenu);
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         String uid = user.getUid();
@@ -72,6 +79,16 @@ public class CarbonCalculationsFragment extends LoadFragment {
         data.put("consumpEmis", Double.toString(aci.consumptionCalc()));
         data.put("totalEmis", Double.toString(aci.totalCalc()));
         reference.child("Yearly Data").updateChildren(data);
+
+        mainMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(
+                        getContext(), NavigationActivity.class);
+                getContext().startActivity(myIntent);
+            }
+        });
+
         return view;
     }
 }
