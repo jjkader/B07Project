@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout21"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EcoTrends.EmissionsTrendPartAFragment">
+
+    <Button
+        android:id="@+id/ADaily"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@color/turquoise"
+        android:text="Daily"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/AWeekly"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AplanetzeLogo"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <Button
+        android:id="@+id/AMonthly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@color/turquoise"
+        android:text="Monthly"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ADaily"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/ADaily"
+        app:layout_constraintTop_toBottomOf="@+id/ADaily"
+        app:layout_constraintVertical_bias="0.50" />
+
+    <Button
+        android:id="@+id/AWeekly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="@color/turquoise"
+        android:text="Weekly"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ADaily"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.80"
+        app:layout_constraintStart_toEndOf="@+id/ADaily"
+        app:layout_constraintTop_toTopOf="@+id/ADaily"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <Button
+        android:id="@+id/ABack"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/turquoise"
+        android:text="Back"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/AMonthly"
+        app:layout_constraintEnd_toEndOf="@+id/AWeekly"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/AWeekly"
+        app:layout_constraintTop_toTopOf="@+id/AMonthly"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ImageButton
+        android:id="@+id/AplanetzeLogo"
+        android:layout_width="210dp"
+        android:layout_height="85dp"
+        android:backgroundTint="@color/light_grey"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textX"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/planetze_logo" />
+
+    <TextView
+        android:id="@+id/ACO2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/ADaily"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AplanetzeLogo" />
+</androidx.constraintlayout.widget.ConstraintLayout>

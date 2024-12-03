@@ -9,7 +9,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
-        android:name="com.example.b07demosummer2024.EcoTrends.EmissionsTrendFragment"
+        android:name="com.example.b07demosummer2024.EcoTrends.EmissionsTrendPartAFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
