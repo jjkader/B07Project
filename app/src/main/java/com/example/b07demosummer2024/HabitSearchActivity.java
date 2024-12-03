@@ -76,16 +76,16 @@ public class HabitSearchActivity extends AppCompatActivity {
             }
         });
 
-        habits.add(new Habit("1","Transportation","large","Did you run walk or bike to work?","Walking and biking to work daily.", R.drawable.transport_habit));
-        habits.add(new Habit("2","Transportation","medium","Did you take the bus to work?","Taking the bus to work daily.", R.drawable.transport_habit));
-        habits.add(new Habit("3","Transportation","small","Did you run carpool to work?","Carpooling with colleagues to work daily.", R.drawable.transport_habit));
-        habits.add(new Habit("4","Food","small","Did you eat BLAH BLAH today?","Eating BLAH BLAH daily.", R.drawable.transport_habit));
-        habits.add(new Habit("5","Food","medium","Did you eat BLAH today?","Eating BLAH daily.", R.drawable.transport_habit));
-        habits.add(new Habit("6","Transportation","large","Did you run walk or bike to work?","Walking and biking to work daily.", R.drawable.transport_habit));
-        habits.add(new Habit("7","Transportation","medium","Did you take the bus to work?","Taking the bus to work daily.", R.drawable.transport_habit));
-        habits.add(new Habit("8","Transportation","small","Did you run carpool to work?","Carpooling with colleagues to work daily.", R.drawable.transport_habit));
-        habits.add(new Habit("9","Food","small","Did you eat BLAH BLAH today?","Eating BLAH BLAH daily.", R.drawable.transport_habit));
-        habits.add(new Habit("10","Food","medium","Did you eat BLAH today?","Eating BLAH daily.", R.drawable.transport_habit));
+        habits.add(new Habit("1","Transportation","large","Walked or biked to work:","I will walk or bike to work daily", R.drawable.transport_habit));
+        habits.add(new Habit("2","Transportation","medium","Took the public transport to work:","I will take the public transport to work daily", R.drawable.transport_habit));
+        habits.add(new Habit("3","Transportation","small","Carpooled to work:","I will carpooling with colleagues to work daily", R.drawable.transport_habit));
+        habits.add(new Habit("4","Food","small","Did not eat chicken today:","I will stop eating chicken", R.drawable.food_habit));
+        habits.add(new Habit("5","Food","medium","Did not eat pork today:","I will stop eating pork", R.drawable.food_habit));
+        habits.add(new Habit("6","Food","small","Did not eat fish today:","I will stop eating fish", R.drawable.food_habit));
+        habits.add(new Habit("7","Food","medium","Did not eat beef today:","I will stop eating beef", R.drawable.food_habit));
+        habits.add(new Habit("8","Food","large","Did not waste any food today:","I will not waste/throw away any food", R.drawable.food_habit));
+        habits.add(new Habit("9","Consumption","medium","Recycled today:","I will recycle something daily", R.drawable.consumption_habit));
+        habits.add(new Habit("10","Consumption","large","Used eco-friendly products today?","I will use eco-friendly products daily", R.drawable.consumption_habit));
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -101,13 +101,13 @@ public class HabitSearchActivity extends AppCompatActivity {
 
         if (transport.isChecked()){type.add("Transportation");}
         if (food.isChecked()){type.add("Food");}
-        if (electricity.isChecked()){type.add("Electricity");}
+        if (electricity.isChecked()){type.add("Consumption");}
         if (small.isChecked()){impact.add("small");}
         if (medium.isChecked()){impact.add("medium");}
         if (large.isChecked()){impact.add("large");}
 
         for (Habit habit : habits){
-            if (type.contains(habit.type) || impact.contains(habit.impact)){
+            if ((type.isEmpty() && impact.contains(habit.impact)) || (type.contains(habit.type) && impact.isEmpty()) || (type.contains(habit.type) && impact.contains(habit.impact))){
                 filtered.add(habit);
             }
         }
@@ -123,7 +123,7 @@ public class HabitSearchActivity extends AppCompatActivity {
     private void searchList(String newText) {
         ArrayList<Habit> searched = new ArrayList<>();
         for (Habit habit : habits){
-            if (habit.description.toLowerCase().contains(newText.toLowerCase())){
+            if (habit.description.toLowerCase().contains(newText.toLowerCase()) || habit.impact.toLowerCase().contains(newText.toLowerCase()) || habit.type.toLowerCase().contains(newText.toLowerCase())){
                 searched.add(habit);
             }
         }
