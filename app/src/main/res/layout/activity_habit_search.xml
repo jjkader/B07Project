@@ -10,10 +10,10 @@
         android:id="@+id/habitrecyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/shoppingFilter"
+        android:layout_below="@+id/filterButton"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="17dp"
-        android:layout_marginBottom="-68dp"/>
+        android:layout_marginBottom="-86dp" />
 
     <SearchView
         android:id="@+id/habitsearchView"
@@ -45,14 +45,6 @@
         android:layout_below="@+id/foodFilter"
         android:layout_marginTop="0dp"
         android:text="Electricity" />
-
-    <CheckBox
-        android:id="@+id/shoppingFilter"
-        android:layout_width="155dp"
-        android:layout_height="22dp"
-        android:layout_below="@+id/electricityFilter"
-        android:layout_marginTop="0dp"
-        android:text="Shopping" />
 
     <CheckBox
         android:id="@+id/smallFilter"
@@ -107,9 +99,11 @@
         android:layout_width="116dp"
         android:layout_height="36dp"
         android:layout_below="@+id/largeFilter"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/shoppingFilter"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="171dp"
         android:text="Filter" />
 
 </RelativeLayout>

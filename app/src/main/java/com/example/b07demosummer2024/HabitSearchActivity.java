@@ -11,11 +11,22 @@ import android.widget.CheckBox;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class HabitSearchActivity extends AppCompatActivity {
+    public static DatabaseReference db = FirebaseDatabase.getInstance("https://b07project-725cc-default-rtdb.firebaseio.com/").getReference();
+    public static FirebaseAuth auth = FirebaseAuth.getInstance();
 
+    public static FirebaseUser user = auth.getCurrentUser();
+    public static String uid = user.getUid();
+    public static DatabaseReference userRef = db.child("users").child(uid);
+    public static DatabaseReference userHabitsRef = userRef.child("Habits");
     private HabitAdapter habitadaptor;
     private RecyclerView recyclerView;
     private ArrayList<Habit> habits;
@@ -28,7 +39,6 @@ public class HabitSearchActivity extends AppCompatActivity {
         CheckBox transport = findViewById(R.id.transportFilter);
         CheckBox food = findViewById(R.id.foodFilter);
         CheckBox electricity = findViewById(R.id.electricityFilter);
-        CheckBox shopping = findViewById(R.id.shoppingFilter);
         CheckBox small = findViewById(R.id.smallFilter);
         CheckBox medium = findViewById(R.id.mediumFilter);
         CheckBox large = findViewById(R.id.largeFilter);
@@ -43,8 +53,8 @@ public class HabitSearchActivity extends AppCompatActivity {
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (transport.isChecked() || food.isChecked() || electricity.isChecked() || shopping.isChecked() || small.isChecked() || medium.isChecked() || large.isChecked()) {
-                    filterList(transport, food, electricity, shopping, small, medium, large);
+                if (transport.isChecked() || food.isChecked() || electricity.isChecked() || small.isChecked() || medium.isChecked() || large.isChecked()) {
+                    filterList(transport, food, electricity, small, medium, large);
                 } else {
                     habitadaptor.setFilteredList(habits);
                     recyclerView.setAdapter(habitadaptor);
@@ -70,17 +80,11 @@ public class HabitSearchActivity extends AppCompatActivity {
         habits.add(new Habit("3","Transportation","small","Did you run carpool to work?","Carpooling with colleagues to work daily.", true, R.drawable.transport_habit));
         habits.add(new Habit("4","Food","small","Did you eat BLAH BLAH today?","Eating BLAH BLAH daily.", false,R.drawable.transport_habit));
         habits.add(new Habit("5","Food","medium","Did you eat BLAH today?","Eating BLAH daily.", false, R.drawable.transport_habit));
-        habits.add(new Habit("1","Transportation","large","Did you run walk or bike to work?","Walking and biking to work daily.", false, R.drawable.transport_habit));
-        habits.add(new Habit("2","Transportation","medium","Did you take the bus to work?","Taking the bus to work daily.", false, R.drawable.transport_habit));
-        habits.add(new Habit("3","Transportation","small","Did you run carpool to work?","Carpooling with colleagues to work daily.", false, R.drawable.transport_habit));
-        habits.add(new Habit("4","Food","small","Did you eat BLAH BLAH today?","Eating BLAH BLAH daily.", false,R.drawable.transport_habit));
-        habits.add(new Habit("5","Food","medium","Did you eat BLAH today?","Eating BLAH daily.", false, R.drawable.transport_habit));
-        habits.add(new Habit("1","Transportation","large","Did you run walk or bike to work?","Walking and biking to work daily.", false, R.drawable.transport_habit));
-        habits.add(new Habit("2","Transportation","medium","Did you take the bus to work?","Taking the bus to work daily.", false, R.drawable.transport_habit));
-        habits.add(new Habit("3","Transportation","small","Did you run carpool to work?","Carpooling with colleagues to work daily.", false, R.drawable.transport_habit));
-        habits.add(new Habit("4","Food","small","Did you eat BLAH BLAH today?","Eating BLAH BLAH daily.", false,R.drawable.transport_habit));
-        habits.add(new Habit("5","Food","medium","Did you eat BLAH today?","Eating BLAH daily.", false, R.drawable.transport_habit));
-
+        habits.add(new Habit("6","Transportation","large","Did you run walk or bike to work?","Walking and biking to work daily.", false, R.drawable.transport_habit));
+        habits.add(new Habit("7","Transportation","medium","Did you take the bus to work?","Taking the bus to work daily.", false, R.drawable.transport_habit));
+        habits.add(new Habit("8","Transportation","small","Did you run carpool to work?","Carpooling with colleagues to work daily.", false, R.drawable.transport_habit));
+        habits.add(new Habit("9","Food","small","Did you eat BLAH BLAH today?","Eating BLAH BLAH daily.", false,R.drawable.transport_habit));
+        habits.add(new Habit("10","Food","medium","Did you eat BLAH today?","Eating BLAH daily.", false, R.drawable.transport_habit));
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -89,7 +93,7 @@ public class HabitSearchActivity extends AppCompatActivity {
 
     }
 
-    private void filterList(CheckBox transport, CheckBox food, CheckBox electricity, CheckBox shopping, CheckBox small, CheckBox medium, CheckBox large) {
+    private void filterList(CheckBox transport, CheckBox food, CheckBox electricity, CheckBox small, CheckBox medium, CheckBox large) {
         ArrayList<String> type = new ArrayList<>();
         ArrayList<String> impact = new ArrayList<>();
         ArrayList<Habit> filtered = new ArrayList<>();
@@ -97,7 +101,6 @@ public class HabitSearchActivity extends AppCompatActivity {
         if (transport.isChecked()){type.add("Transportation");}
         if (food.isChecked()){type.add("Food");}
         if (electricity.isChecked()){type.add("Electricity");}
-        if (shopping.isChecked()){type.add("Shopping");}
         if (small.isChecked()){impact.add("small");}
         if (medium.isChecked()){impact.add("medium");}
         if (large.isChecked()){impact.add("large");}

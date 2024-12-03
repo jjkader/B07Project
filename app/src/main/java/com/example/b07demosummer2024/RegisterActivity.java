@@ -51,11 +51,11 @@ public class RegisterActivity extends AppCompatActivity {
         passConfirmText = (EditText) findViewById(R.id.editTextConfirmPass);
 
         logo.setOnClickListener(new View.OnClickListener(){
-           @Override
-           public void onClick(View v){
-               Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://planetze.io/"));
-               startActivity(browserIntent);
-           }
+            @Override
+            public void onClick(View v){
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://planetze.io/"));
+                startActivity(browserIntent);
+            }
         });
 
         buttonLogin.setOnClickListener(new View.OnClickListener(){
