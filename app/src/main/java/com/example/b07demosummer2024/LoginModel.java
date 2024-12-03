@@ -27,7 +27,8 @@ public class LoginModel {
             if (task.isSuccessful()){
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null){
-                    presenter.onLoginSuccess(user);
+                    presenter.onLoginSuccess();
+                    checkUserData(user.getUid(), presenter);
                 } else{
                     presenter.onLoginFailure("User not found after successful login");
                 }
@@ -70,7 +71,7 @@ public class LoginModel {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                presenter.onResetPasswordFailure("Error with resetting your email");
+                presenter.onResetPasswordFailure("Error with resetting your password");
             }
         });
     }

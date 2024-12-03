@@ -62,3 +62,7 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.google.firebase.auth)
 }
+
+tasks.withType<Test> {
+    jvmArgs("--add-opens", "java.base/java.lang=ALL-UNNAMED")
+}

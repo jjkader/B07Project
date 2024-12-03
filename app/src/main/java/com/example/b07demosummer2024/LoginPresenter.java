@@ -21,47 +21,46 @@ public class LoginPresenter {
     }
 
     public void resetPassword(String email){
-        if (TextUtils.isEmpty(email)){
+        if (email.isBlank()){
             view.showText("Please provide an email");
             return;
         }
         model.resetPassword(email, this);
     }
 
-    public void onLoginSuccess(FirebaseUser user){
+    void onLoginSuccess(){
         view.showText("Logging in");
-        model.checkUserData(user.getUid(), this);
     }
 
-    public void onLoginFailure(String message){
+    void onLoginFailure(String message){
         view.showText(message);
     }
 
-    public void onUserDataCheckComplete(boolean hasYearlyData){
+    void onUserDataCheckComplete(boolean hasYearlyData){
         if (hasYearlyData){
             view.openNavigation();
         } else{
             view.openAnnualCarbon();
         }
     }
-    public void onUserDataCheckError(String s) {
+    void onUserDataCheckError(String s) {
         view.showText(s);
     }
 
-    public void onResetPasswordSuccess(){
+    void onResetPasswordSuccess(){
         view.showText("Reset password email sent.");
     }
-    public void onResetPasswordFailure(String error) {
+    void onResetPasswordFailure(String error) {
         view.showText(error);
     }
-    public boolean checkFields(String email, String password) {
-        if (TextUtils.isEmpty(email)){
+    private boolean checkFields(String email, String password) {
+        if (email.isBlank()){
             view.showText("Please enter an email");
             return false;
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        } else if (!androidx.core.util.PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()) {
             view.showText("Please enter a valid email");
             return false;
-        } else if (TextUtils.isEmpty(password) || password.length() < 6) {
+        } else if (password.isBlank() || password.length() < 6) {
             view.showText("Invalid password");
             return false;
         }
