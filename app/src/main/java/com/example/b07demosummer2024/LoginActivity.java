@@ -149,10 +149,6 @@ public class LoginActivity extends AppCompatActivity {
     private void openAnnualCarbon() {
         Intent myIntent = new Intent(LoginActivity.this,
                 AnnualCarbonActivity.class);
-        // clear activities before questionnaire
-        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                | Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         LoginActivity.this.startActivity(myIntent);
         finish();
     }
@@ -160,10 +156,6 @@ public class LoginActivity extends AppCompatActivity {
     private void openNavigation() {
         Intent myIntent = new Intent(
                 LoginActivity.this, NavigationActivity.class);
-        // clear activities before NavigationActivity
-        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                | Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         LoginActivity.this.startActivity(myIntent);
         finish();
     }

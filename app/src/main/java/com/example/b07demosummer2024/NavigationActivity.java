@@ -12,7 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.b07demosummer2024.DailyActivity.DailyTrackingActivity;
+import com.example.b07demosummer2024.DailyActivity.EcoTrackerHomeFragment;
 import com.example.b07demosummer2024.AnnualCarbon.AnnualCarbonActivity;
+import com.example.b07demosummer2024.EcoTrends.EcoGaugeActivity;
 
 public class NavigationActivity extends AppCompatActivity {
 
@@ -45,15 +48,17 @@ public class NavigationActivity extends AppCompatActivity {
         buttonNavTracker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(new SpinnerFragment());
+                Intent myIntent = new Intent(NavigationActivity.this, DailyTrackingActivity.class);
+                NavigationActivity.this.startActivity(myIntent);
             }
         });
 
         buttonNavGauge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(new ScrollerFragment());
-            } // TODO: Need to replace with the actual fragment once created
+                Intent myIntent = new Intent(NavigationActivity.this, EcoGaugeActivity.class);
+                NavigationActivity.this.startActivity(myIntent);
+            }
         });
 
         buttonNavBalance.setOnClickListener(new View.OnClickListener() {
@@ -75,10 +80,6 @@ public class NavigationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent myIntent = new Intent(NavigationActivity.this,
                         AnnualCarbonActivity.class);
-                // clear activities before questionnaire
-                myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        | Intent.FLAG_ACTIVITY_NEW_TASK
-                        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 NavigationActivity.this.startActivity(myIntent);
                 finish();
             }
