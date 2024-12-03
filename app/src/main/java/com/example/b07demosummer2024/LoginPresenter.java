@@ -8,9 +8,9 @@ public class LoginPresenter {
     private final LoginView view;
     private final LoginModel model;
 
-    public LoginPresenter(LoginView view){
+    public LoginPresenter(LoginView view, LoginModel model){
         this.view = view;
-        this.model = new LoginModel();
+        this.model = model;
     }
 
     public void login(String email, String password){
@@ -22,19 +22,19 @@ public class LoginPresenter {
 
     public void resetPassword(String email){
         if (TextUtils.isEmpty(email)){
-            view.showToast("Please provide an email");
+            view.showText("Please provide an email");
             return;
         }
         model.resetPassword(email, this);
     }
 
     public void onLoginSuccess(FirebaseUser user){
-        view.showToast("Logging in");
+        view.showText("Logging in");
         model.checkUserData(user.getUid(), this);
     }
 
     public void onLoginFailure(String message){
-        view.showToast(message);
+        view.showText(message);
     }
 
     public void onUserDataCheckComplete(boolean hasYearlyData){
@@ -45,24 +45,24 @@ public class LoginPresenter {
         }
     }
     public void onUserDataCheckError(String s) {
-        view.showToast(s);
+        view.showText(s);
     }
 
     public void onResetPasswordSuccess(){
-        view.showToast("Reset password email sent.");
+        view.showText("Reset password email sent.");
     }
     public void onResetPasswordFailure(String error) {
-        view.showToast(error);
+        view.showText(error);
     }
     public boolean checkFields(String email, String password) {
         if (TextUtils.isEmpty(email)){
-            view.showToast("Please enter an email");
+            view.showText("Please enter an email");
             return false;
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            view.showToast("Please enter a valid email");
+            view.showText("Please enter a valid email");
             return false;
         } else if (TextUtils.isEmpty(password) || password.length() < 6) {
-            view.showToast("Password must be at least 7 characters long");
+            view.showText("Invalid password");
             return false;
         }
         return true;

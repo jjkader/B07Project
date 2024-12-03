@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.b07demosummer2024.AnnualCarbon.AnnualCarbonActivity;
@@ -15,6 +16,7 @@ import com.example.b07demosummer2024.AnnualCarbon.AnnualCarbonActivity;
 public class LoginView extends AppCompatActivity {
     private EditText emailText, passText;
     private String email, password;
+    private TextView noticeText;
 
     LoginPresenter presenter;
 
@@ -28,7 +30,8 @@ public class LoginView extends AppCompatActivity {
         Button buttonPassReset = findViewById(R.id.buttonPassReset);
         emailText = findViewById(R.id.editTextEmail);
         passText = findViewById(R.id.editTextPassword);
-        presenter = new LoginPresenter(this);
+        noticeText = findViewById(R.id.textNotice);
+        presenter = new LoginPresenter(this, new LoginModel());
 
         logo.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -42,8 +45,8 @@ public class LoginView extends AppCompatActivity {
         buttonLoginCred.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String email = emailText.getText().toString();
-                String password = passText.getText().toString();
+                email = emailText.getText().toString();
+                password = passText.getText().toString();
                 presenter.login(email, password);
             }
         });
@@ -51,13 +54,13 @@ public class LoginView extends AppCompatActivity {
         buttonPassReset.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String email = emailText.getText().toString();
+                email = emailText.getText().toString();
                 presenter.resetPassword(email);
             }
         });
     }
-    public void showToast(String message){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void showText(String message){
+        noticeText.setText(message);
     }
     public void openAnnualCarbon() {
         Intent myIntent = new Intent(LoginView.this,
