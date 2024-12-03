@@ -1,5 +1,6 @@
 package com.example.b07demosummer2024;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull  HabitViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull  HabitViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.typeView.setText(habits.get(position).type);
         holder.impactView.setText(habits.get(position).impact);
         holder.descriptionView.setText(habits.get(position).description);
@@ -53,10 +54,11 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitViewHolder> {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     // Get the boolean value from the snapshot
-                    boolean habitStatus = dataSnapshot.getValue(Boolean.class);
+                    int habitStatus = dataSnapshot.getValue(Integer.class);
 
                     // Set the checkbox state based on the retrieved boolean value
-                    holder.activeView.setChecked(habitStatus);
+                    if (habitStatus == -1) {holder.activeView.setChecked(false);}
+                    else {holder.activeView.setChecked(true);}
                 }
             }
 
@@ -78,10 +80,10 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitViewHolder> {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
                         // Get the boolean value from the snapshot
-                        boolean habitStatus = dataSnapshot.getValue(Boolean.class);
+                        int habitStatus = dataSnapshot.getValue(Integer.class);
 
                         // Set the checkbox state based on the retrieved boolean value
-                        userHabitsRef.setValue(!habitStatus);
+                        userHabitsRef.child(habits.get(position).id).setValue(habitStatus*-1);
                     }
                 }
 

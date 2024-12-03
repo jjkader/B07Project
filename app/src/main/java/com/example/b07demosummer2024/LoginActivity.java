@@ -99,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()) {
-                                        // TODO: Send the user a reset password email
                                         resetPassword();
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Email does not exist", Toast.LENGTH_SHORT).show();

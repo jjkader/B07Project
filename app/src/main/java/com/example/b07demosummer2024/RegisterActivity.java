@@ -165,15 +165,15 @@ public class RegisterActivity extends AppCompatActivity {
         DatabaseReference key = db.child("users").child(uid);
         key.setValue(u);
         DatabaseReference habits_key = key.child("Habits");
-        habits_key.child("1").setValue(false);
-        habits_key.child("2").setValue(false);
-        habits_key.child("3").setValue(false);
-        habits_key.child("4").setValue(false);
-        habits_key.child("5").setValue(false);
-        habits_key.child("6").setValue(false);
-        habits_key.child("7").setValue(false);
-        habits_key.child("8").setValue(false);
-        habits_key.child("9").setValue(false);
-        habits_key.child("10").setValue(false);
+        habits_key.child("1").setValue(-1);
+        habits_key.child("2").setValue(-1);
+        habits_key.child("3").setValue(-1);
+        habits_key.child("4").setValue(-1);
+        habits_key.child("5").setValue(-1);
+        habits_key.child("6").setValue(-1);
+        habits_key.child("7").setValue(-1);
+        habits_key.child("8").setValue(-1);
+        habits_key.child("9").setValue(-1);
+        habits_key.child("10").setValue(-1);
     }
 }

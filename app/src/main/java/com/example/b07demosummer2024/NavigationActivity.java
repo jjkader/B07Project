@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.security.AccessController;
+import java.util.zip.Inflater;
+
 public class NavigationActivity extends AppCompatActivity {
 
     public NavigationActivity() {
@@ -50,7 +53,8 @@ public class NavigationActivity extends AppCompatActivity {
         buttonNavGauge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(new ScrollerFragment());
+                Intent intent = new Intent(NavigationActivity.this, HabitSearchActivity.class);
+                startActivity(intent);
             } // TODO: Need to replace with the actual fragment once created
         });
 
