@@ -124,17 +124,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ConsumpTotal" />
 
-    <TextView
-        android:id="@+id/countrySelected"
-        android:layout_width="272dp"
-        android:layout_height="104dp"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="50dp"
-        android:text="TextView"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/consumpCalc" />
-
     <Button
         android:id="@+id/mainMenu"
         android:layout_width="wrap_content"

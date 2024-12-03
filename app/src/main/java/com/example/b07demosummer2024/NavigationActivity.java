@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.b07demosummer2024.DailyActivity.DailyTrackingActivity;
-import com.example.b07demosummer2024.DailyActivity.EcoTrackerHomeFragment;
 import com.example.b07demosummer2024.AnnualCarbon.AnnualCarbonActivity;
 import com.example.b07demosummer2024.EcoTrends.EcoGaugeActivity;
 

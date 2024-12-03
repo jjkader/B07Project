@@ -44,8 +44,6 @@ public class CarbonCalculationsFragment extends LoadFragment {
         TextView totalFood = view.findViewById(R.id.foodCalc);
         TextView totalHousing = view.findViewById(R.id.houseCalc);
         TextView totalConsumption = view.findViewById(R.id.consumpCalc);
-        TextView countryDisplay = view.findViewById(R.id.countrySelected);
-
 
         Button mainMenu = view.findViewById(R.id.mainMenu);
 
@@ -56,26 +54,6 @@ public class CarbonCalculationsFragment extends LoadFragment {
                 "https://b07project-725cc-default-rtdb.firebaseio.com/");
         DatabaseReference reference = fdb.getReference().child("users").child(uid);
         AnnualCarbonInformation aci = new AnnualCarbonInformation(getContext());
-
-        HashMap<String, Double> countriesMap = new HashMap<>();
-        populateCountryMap(getContext(), countriesMap);
-        String country = aci.country;
-        long totalUserEmis = (long) aci.totalCalc() / 1000;
-        long percent =  (long) (totalUserEmis / countriesMap.get(country) * 100);
-        percent = Math.round(percent);
-        if (percent < 100){
-            String text = "You are " + Double.toString(percent) + "% " +
-                    "below " + country + " carbon emissions per capita";
-            countryDisplay.setText(text);
-        } else if (percent == 100){
-            String text = "You are on par with " + country +
-                    " carbon emissions per capita ";
-            countryDisplay.setText(text);
-        } else{
-            String text = "You are " + Double.toString(percent) + "% " +
-                    "above " + country + " carbon emissions per capita";
-            countryDisplay.setText(text);
-        }
 
         String transEmissions = (aci.transportationCalc()) + " kg";
         String foodEmissions = (aci.foodCalc()) + " kg";
@@ -105,6 +83,7 @@ public class CarbonCalculationsFragment extends LoadFragment {
         data.put("houseEmis", Double.toString(aci.housingCalc()));
         data.put("consumpEmis", Double.toString(aci.consumptionCalc()));
         data.put("totalEmis", Double.toString(aci.totalCalc()));
+        data.put("country",  aci.getCountry());
         reference.child("Yearly Data").updateChildren(data);
 
         mainMenu.setOnClickListener(new View.OnClickListener() {
@@ -115,30 +94,7 @@ public class CarbonCalculationsFragment extends LoadFragment {
                 getContext().startActivity(myIntent);
             }
         });
-
-
         return view;
-    }
-
-    public void populateCountryMap(Context context, HashMap<String, Double> map){
-        InputStreamReader is;
-        try {
-            is = new InputStreamReader(context.getAssets().open("globalAvg.csv"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        BufferedReader reader = new BufferedReader(is);
-        try{
-            String line = reader.readLine();
-            while ((line = reader.readLine()) != null){
-                String[] tokens = line.split(",");
-                String country = tokens[0];
-                Double emissions = parseDouble(tokens[1]);
-                map.put(country, emissions);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }
 
