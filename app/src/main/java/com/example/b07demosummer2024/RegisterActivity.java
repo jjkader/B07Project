@@ -6,8 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
 import android.view.View;
@@ -61,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                Intent myIntent = new Intent(RegisterActivity.this, LoginView.class);
                 RegisterActivity.this.startActivity(myIntent);
                 finish();
             }
@@ -87,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             "https://b07project-725cc-default-rtdb.firebaseio.com/").getReference();
                                     addToDatabase(db, u, user.getUid());
                                     Toast.makeText(RegisterActivity.this, "Redirecting to Login Page!", Toast.LENGTH_LONG).show();
-                                    Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    Intent myIntent = new Intent(RegisterActivity.this, LoginView.class);
                                     RegisterActivity.this.startActivity(myIntent);
                                     finish();
                                 }

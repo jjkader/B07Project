@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(view.getContext(), LoginActivity.class);
+                Intent myIntent = new Intent(view.getContext(), LoginView.class);
                 view.getContext().startActivity(myIntent);
             }
         });
