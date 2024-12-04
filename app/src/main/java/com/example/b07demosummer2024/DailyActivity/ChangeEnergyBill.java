@@ -18,7 +18,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.b07demosummer2024.LoginActivity;
 import com.example.b07demosummer2024.R;
 import com.google.firebase.database.DatabaseReference;
 

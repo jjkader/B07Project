@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.b07demosummer2024.LoginActivity;
 import com.example.b07demosummer2024.NavigationActivity;
 import com.example.b07demosummer2024.R;
 import com.google.firebase.auth.FirebaseAuth;

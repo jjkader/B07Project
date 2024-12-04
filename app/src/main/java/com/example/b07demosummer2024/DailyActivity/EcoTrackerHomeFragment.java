@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.example.b07demosummer2024.AnnualCarbon.AnnualCarbonActivity;
 import com.example.b07demosummer2024.HabitSearchActivity;
-import com.example.b07demosummer2024.LoginActivity;
 import com.example.b07demosummer2024.R;
 import com.example.b07demosummer2024.User;
 import com.google.android.gms.tasks.Task;

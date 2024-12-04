@@ -83,8 +83,8 @@ public class EmissionsTrendFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_emissions_trend, container, false);
         tvX = view.findViewById(R.id.textX);
-        String dateLiteral = "Date";
-        tvX.setText(dateLiteral);
+        String unitExplanation = "in kg of CO2";
+        tvX.setText(unitExplanation);
         chart = view.findViewById(R.id.lineChart);
 
         backButton = view.findViewById(R.id.buttonBack);
