@@ -14,7 +14,6 @@
         android:layout_height="85dp"
         android:backgroundTint="@color/light_grey"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/calendarView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textDate"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +54,12 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/turquoise"
             android:text="Edit Activity" />
+        <Button
+            android:id="@+id/ecoGoals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/turquoise"
+            android:text="Eco Goals" />
     </LinearLayout>
 
     <ScrollView

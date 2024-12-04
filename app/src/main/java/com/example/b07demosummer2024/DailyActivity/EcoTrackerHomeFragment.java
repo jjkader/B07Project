@@ -1,5 +1,7 @@
 package com.example.b07demosummer2024.DailyActivity;
 
+import static android.view.View.GONE;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,14 +19,26 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.b07demosummer2024.AnnualCarbon.AnnualCarbonActivity;
+import com.example.b07demosummer2024.HabitSearchActivity;
+import com.example.b07demosummer2024.LoginActivity;
 import com.example.b07demosummer2024.R;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 import java.text.DecimalFormat;
 
@@ -34,12 +48,13 @@ public class EcoTrackerHomeFragment extends Fragment {
     private static final String ARG_PARAM3 = "day";
     private static final DecimalFormat df = new DecimalFormat("0.00");
     int year, month, day;
-    Button openCalendar, editTodaysActivity;
+    Button openCalendar, editTodaysActivity, ecoGoals;
     TextView date, textPersonalDist, textPublicTime, textWalkDist, textFlight, textBeef, textPork, textChicken, textFish, textPlant,
             textNumServings, textNumClothes, textNumElectronics, textNumOther;
     TextView textPersonalCO2, textPublicCO2, textWalkCO2, textFlightCO2, textBeefCO2, textPorkCO2, textChickenCO2, textFishCO2,
             textPlantCO2, textClothesCO2, textElectronicsCO2, textOtherCO2, textTotalCO2, textHouseCO2;
     Switch miles;
+    Map<String, Long> habits;
     String personalDistKm, walkDistKm, personalDistMi, walkDistMi, Date;
 
     public EcoTrackerHomeFragment() {
@@ -87,6 +102,7 @@ public class EcoTrackerHomeFragment extends Fragment {
 
         openCalendar = (Button) view.findViewById(R.id.openCalendar);
         editTodaysActivity = (Button) view.findViewById(R.id.editTodayActivity);
+        ecoGoals = (Button) view.findViewById(R.id.ecoGoals);
 
         date = (TextView) view.findViewById(R.id.textDate);
         textPersonalDist = (TextView) view.findViewById(R.id.textPersonalDist);
@@ -151,6 +167,34 @@ public class EcoTrackerHomeFragment extends Fragment {
             public void onClick(View v) {
                 Fragment fragment = ChangeDayActivityFragment.newInstance(year, month, day);
                 loadFragment(fragment);
+            }
+        });
+        ecoGoals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DatabaseReference db = FirebaseDatabase.getInstance(
+                        "https://b07project-725cc-default-rtdb.firebaseio.com/").getReference();
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                String uid = currentUser.getUid();
+                DatabaseReference habitData = db.child("users").child(uid);
+                Task<DataSnapshot> task = getDataFromFirebase(habitData);
+                Task<List<Object>> taskComplete = Tasks.whenAllSuccess(task);
+                taskComplete.addOnSuccessListener(aVoid -> {
+                    if (task.getResult() == null) {
+                        Toast.makeText(getContext(), "There was an error retrieving the data", Toast.LENGTH_SHORT).show();
+                        getParentFragmentManager().popBackStack();
+                    }
+                    habits = (Map<String, Long>)task.getResult().child("Habits").getValue();
+                    Intent myIntent;
+                    if (habits.containsValue((long)1)){
+                        myIntent = new Intent(getContext(), HabitTrackerActivity.class);
+                    }
+                    else{
+                        myIntent = new Intent(getContext(), HabitSearchActivity.class);
+                    }
+                    getContext().startActivity(myIntent);
+                });
             }
         });
 
@@ -420,6 +464,23 @@ public class EcoTrackerHomeFragment extends Fragment {
             }
         });
     }
+
+    private Task<DataSnapshot> getDataFromFirebase(DatabaseReference ref) {
+        final TaskCompletionSource<DataSnapshot> taskCompletionSource = new TaskCompletionSource<>();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                taskCompletionSource.setResult(snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                taskCompletionSource.setException(error.toException());
+            }
+        });
+        return taskCompletionSource.getTask();
+    }
+
 
     private void loadFragment(Fragment fragment) {
         FragmentManager fragmentManager = getParentFragmentManager();

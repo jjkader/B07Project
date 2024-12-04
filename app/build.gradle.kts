@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation (libs.mpandroidchart)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
