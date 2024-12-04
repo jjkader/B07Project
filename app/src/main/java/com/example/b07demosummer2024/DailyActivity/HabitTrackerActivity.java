@@ -60,16 +60,6 @@ public class HabitTrackerActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.habitTracker, new EcoTrackerHomeFragment());
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-        });
         findViewById(R.id.goalButton).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
