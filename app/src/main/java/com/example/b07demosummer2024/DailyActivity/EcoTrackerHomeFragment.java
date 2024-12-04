@@ -1,6 +1,8 @@
 package com.example.b07demosummer2024.DailyActivity;
 
-import static android.view.View.GONE;
+import static com.example.b07demosummer2024.DailyActivity.DailyTrackingActivity.userDailyActivityRef;
+import static com.example.b07demosummer2024.DailyActivity.DailyTrackingActivity.userMonthlyActivityRef;
+import static com.example.b07demosummer2024.DailyActivity.DailyTrackingActivity.userWeeklyActivityRef;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -25,6 +27,7 @@ import com.example.b07demosummer2024.AnnualCarbon.AnnualCarbonActivity;
 import com.example.b07demosummer2024.HabitSearchActivity;
 import com.example.b07demosummer2024.LoginActivity;
 import com.example.b07demosummer2024.R;
+import com.example.b07demosummer2024.User;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.android.gms.tasks.Tasks;
@@ -48,9 +51,10 @@ public class EcoTrackerHomeFragment extends Fragment {
     private static final String ARG_PARAM3 = "day";
     private static final DecimalFormat df = new DecimalFormat("0.00");
     int year, month, day;
+    private String date, startOfWeek, monthStr;
+    TextView dateText, textPersonalDist, textPublicTime, textWalkDist, textFlight, textBeef, textPork, textChicken, textFish,
+            textPlant, textNumServings, textNumClothes, textNumElectronics, textNumOther;
     Button openCalendar, editTodaysActivity, ecoGoals;
-    TextView date, textPersonalDist, textPublicTime, textWalkDist, textFlight, textBeef, textPork, textChicken, textFish, textPlant,
-            textNumServings, textNumClothes, textNumElectronics, textNumOther;
     TextView textPersonalCO2, textPublicCO2, textWalkCO2, textFlightCO2, textBeefCO2, textPorkCO2, textChickenCO2, textFishCO2,
             textPlantCO2, textClothesCO2, textElectronicsCO2, textOtherCO2, textTotalCO2, textHouseCO2;
     Switch miles;
@@ -63,6 +67,17 @@ public class EcoTrackerHomeFragment extends Fragment {
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         day = c.get(Calendar.DAY_OF_MONTH);
+        date = year + "-" + (month+1) + "-" + day;
+        monthStr = year + "-" + (month+1);
+        // get the first day of the current week (Sunday or Monday depending on Region)
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        int firstDayOfWeek = c.getFirstDayOfWeek();
+        c.add(Calendar.DAY_OF_MONTH, -(dayOfWeek - firstDayOfWeek));
+        int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+        int yearOfWeek = c.get(Calendar.YEAR);
+        int monthOfWeek = c.get(Calendar.MONTH) + 1;
+
+        startOfWeek = yearOfWeek + "-" + monthOfWeek + "-" + dayOfMonth;
     }
 
     /**
@@ -72,7 +87,7 @@ public class EcoTrackerHomeFragment extends Fragment {
      * @param year Current year.
      * @param month Current month.
      * @param day Current day.
-     * @return A new instance of fragment CalendarFragment.
+     * @return A new instance of fragment EcoTrackerHomeFragment.
      */
     public static EcoTrackerHomeFragment newInstance(int year, int month, int day) {
         EcoTrackerHomeFragment fragment = new EcoTrackerHomeFragment();
@@ -91,6 +106,19 @@ public class EcoTrackerHomeFragment extends Fragment {
             year = getArguments().getInt(ARG_PARAM1);
             month = getArguments().getInt(ARG_PARAM2);
             day = getArguments().getInt(ARG_PARAM3);
+            date = year + "-" + (month+1) + "-" + day;
+            monthStr = year + "-" + (month+1);
+            // get the first day of the current week (Sunday or Monday depending on Region)
+            Calendar c = Calendar.getInstance();
+            c.set(year, month, day);
+            int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+            int firstDayOfWeek = c.getFirstDayOfWeek();
+            c.add(Calendar.DAY_OF_MONTH, -(dayOfWeek - firstDayOfWeek));
+            int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+            int yearOfWeek = c.get(Calendar.YEAR);
+            int monthOfWeek = c.get(Calendar.MONTH) + 1;
+
+            startOfWeek = yearOfWeek + "-" + monthOfWeek + "-" + dayOfMonth;
         }
     }
 
@@ -104,7 +132,7 @@ public class EcoTrackerHomeFragment extends Fragment {
         editTodaysActivity = (Button) view.findViewById(R.id.editTodayActivity);
         ecoGoals = (Button) view.findViewById(R.id.ecoGoals);
 
-        date = (TextView) view.findViewById(R.id.textDate);
+        dateText = (TextView) view.findViewById(R.id.textDate);
         textPersonalDist = (TextView) view.findViewById(R.id.textPersonalDist);
         textPublicTime = (TextView) view.findViewById(R.id.textPublicDist);
         textWalkDist = (TextView) view.findViewById(R.id.textWalkDist);
@@ -147,7 +175,7 @@ public class EcoTrackerHomeFragment extends Fragment {
         });
 
         Date = year + "-" + (month+1) + "-" + day;
-        date.setText(Date);
+        dateText.setText(Date);
 
         DatabaseReference userRef = DailyTrackingActivity.userRef;
         DatabaseReference userDailyActivityRef = DailyTrackingActivity.userDailyActivityRef;
@@ -327,132 +355,75 @@ public class EcoTrackerHomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    if (snapshot.exists()) {
-                        DataSnapshot data = snapshot.child("Yearly Data");
-                        Map<String, Object> yearlyData = (Map<String, Object>) data.getValue();
-                        String carType = (String) yearlyData.get("carType");
-                        String foodWaste = (String) yearlyData.get("foodWaste");
-                        // TODO: get all yearly data, then take monthly energy bill data to find value
-                        double yearlyHouseEmissions = Double
-                                .parseDouble((String) yearlyData.get("houseEmis"));
-                        String ecoClothes = (String) yearlyData.get("buyEcoClothes");
-                        String unit = " kg CO2e";
+                    DataSnapshot data = snapshot.child("Yearly Data");
+                    Map<String, Object> yearlyData = (Map<String, Object>) data.getValue();
+                    String carType = (String) yearlyData.get("carType");
+                    String foodWaste = (String) yearlyData.get("foodWaste");
+                    // TODO: get all yearly data, then take monthly energy bill data to find value
+                    double yearlyHouseEmissions = Double
+                            .parseDouble((String) yearlyData.get("houseEmis"));
+                    String ecoClothes = (String) yearlyData.get("buyEcoClothes");
+                    String unit = " kg CO2e";
 
-                        double personalCO2;
-                        if (carType.equals("Gasoline")) {
-                            personalCO2 = 0.24;
-                        } else if (carType.equals("Diesel")) {
-                            personalCO2 = 0.27;
-                        } else if (carType.equals("Hybrid")) {
-                            personalCO2 = 0.16;
-                        } else if (carType.equals("Electric")) {
-                            personalCO2 = 0.05;
-                        } else {
-                            personalCO2 = 0;
-                        }
-                        personalCO2 *= personalDist;
-                        String personalCO2Str = df.format(personalCO2) + unit;
-                        textPersonalCO2.setText(personalCO2Str);
+                    double personalCO2 = calculatePersonalCO2(personalDist, carType);
+                    String personalCO2Str = df.format(personalCO2) + unit;
+                    textPersonalCO2.setText(personalCO2Str);
 
-                        // from the yearly calculations, estimate roughly 6kg/h on public transit
-                        double publicCO2 = 6;
-                        publicCO2 *= publicTime;
-                        String publicCO2Str = df.format(publicCO2) + unit;
-                        textPublicCO2.setText(publicCO2Str);
+                    double publicCO2 = calculatePublicCO2(publicTime);
+                    String publicCO2Str = df.format(publicCO2) + unit;
+                    textPublicCO2.setText(publicCO2Str);
 
-                        String walkCO2Str = "0" + unit;
-                        textWalkCO2.setText(walkCO2Str);
+                    double walkCO2 = calculateWalkCO2();
+                    String walkCO2Str = df.format(walkCO2) + unit;
+                    textWalkCO2.setText(walkCO2Str);
 
-                        // directly from yearly calculations
-                        // TODO: should access file for values
-                        double flightCO2 = 0;
-                        if (haul.equals("Short")) {
-                            if (numFlight < 3) {
-                                flightCO2 = 225;
-                            } else if (numFlight < 6) {
-                                flightCO2 = 600;
-                            } else if (numFlight < 11) {
-                                flightCO2 = 1200;
-                            } else {
-                                flightCO2 = 1800;
-                            }
-                        } else {
-                            if (numFlight < 3) {
-                                flightCO2 = 825;
-                            } else if (numFlight < 6) {
-                                flightCO2 = 2200;
-                            } else if (numFlight < 11) {
-                                flightCO2 = 4400;
-                            } else {
-                                flightCO2 = 6600;
-                            }
-                        }
-                        String flightCO2Str = flightCO2 + unit;
-                        textFlightCO2.setText(flightCO2Str);
+                    double flightCO2 = calculateFlightCO2(numFlight, haul);
+                    String flightCO2Str = df.format(flightCO2) + unit;
+                    textFlightCO2.setText(flightCO2Str);
 
-                        // Daily / 365 in yearly calculations per meal
-                        // remove value dependent on foodWaste
-                        // estimate 365*3 = 1095 meals a year
-                        double wasteFactor = 0;
-                        if (foodWaste.equals("Frequently")) {
-                            wasteFactor = 140.4 / 1095;
-                        } else if (foodWaste.equals("Occasionally")) {
-                            wasteFactor = 70.2 / 1095;
-                        } else if (foodWaste.equals("Rarely")) {
-                            wasteFactor = 23.4 / 1095;
-                        }
-                        double beefCO2, porkCO2, chickenCO2, fishCO2;
-                        beefCO2 = (numBeef * 2500 / (double) 365) + (numBeef * wasteFactor);
-                        porkCO2 = (numPork * 1450 / (double) 365) + (numPork * wasteFactor);
-                        chickenCO2 = (numChicken * 950 / (double) 365) + (numChicken * wasteFactor);
-                        fishCO2 = (numFish * 800 / (double) 365) + (numFish * wasteFactor);
+                    double beefCO2 = calculateFoodCO2(numBeef, "beef", foodWaste);
+                    double porkCO2 = calculateFoodCO2(numPork, "pork", foodWaste);
+                    double chickenCO2 = calculateFoodCO2(numChicken, "chicken", foodWaste);
+                    double fishCO2 = calculateFoodCO2(numFish, "fish", foodWaste);
 
-                        String beefCO2Str = df.format(beefCO2) + unit;
-                        String porkCO2Str = df.format(porkCO2) + unit;
-                        String chickenCO2Str = df.format(chickenCO2) + unit;
-                        String fishCO2Str = df.format(fishCO2) + unit;
-                        textBeefCO2.setText(beefCO2Str);
-                        textPorkCO2.setText(porkCO2Str);
-                        textChickenCO2.setText(chickenCO2Str);
-                        textFishCO2.setText(fishCO2Str);
-                        String plantCO2Str = "0" + unit;
-                        textPlantCO2.setText(plantCO2Str);
+                    String beefCO2Str = df.format(beefCO2) + unit;
+                    String porkCO2Str = df.format(porkCO2) + unit;
+                    String chickenCO2Str = df.format(chickenCO2) + unit;
+                    String fishCO2Str = df.format(fishCO2) + unit;
+                    textBeefCO2.setText(beefCO2Str);
+                    textPorkCO2.setText(porkCO2Str);
+                    textChickenCO2.setText(chickenCO2Str);
+                    textFishCO2.setText(fishCO2Str);
+                    String plantCO2Str = "0" + unit;
+                    textPlantCO2.setText(plantCO2Str);
 
-                        // estimation from yearly, 360kg/yr monthly roughly 7kg/piece
-                        double clothesCO2 = 1;
-                        if (ecoClothes.equals("Regularly")) {
-                            clothesCO2 = 0.5;
-                        } else if (ecoClothes.equals("Occasionally")) {
-                            clothesCO2 = 0.7;
-                        }
-                        clothesCO2 *= 7 * numClothes;
-                        String clothesCO2Str = df.format(clothesCO2) + unit;
-                        textClothesCO2.setText(clothesCO2Str);
+                    double clothesCO2 = calculateClothesCO2(numClothes, ecoClothes);
+                    String clothesCO2Str = df.format(clothesCO2) + unit;
+                    textClothesCO2.setText(clothesCO2Str);
 
-                        // 300kg per item
-                        double electronicsCO2 = 300 * numElectronics;
-                        String electronicsCO2Str = df.format(electronicsCO2) + unit;
-                        textElectronicsCO2.setText(electronicsCO2Str);
+                    double electronicsCO2 = calculateElectronicsCO2(numElectronics);
+                    String electronicsCO2Str = df.format(electronicsCO2) + unit;
+                    textElectronicsCO2.setText(electronicsCO2Str);
 
-                        // estimate 500kg per item assuming they're large purchases
-                        double otherCO2 = 500 * numOther;
-                        String otherCO2Str = df.format(otherCO2) + unit;
-                        textOtherCO2.setText(otherCO2Str);
+                    double otherCO2 = calculateOtherCO2(numOther);
+                    String otherCO2Str = df.format(otherCO2) + unit;
+                    textOtherCO2.setText(otherCO2Str);
 
-                        Double dailyHouseEmissions = yearlyHouseEmissions / 365;
+                    double dailyHouseEmissions = calculateHousingCO2(yearlyHouseEmissions);
+                    String dailyHouseEmissionsStr = df.format(dailyHouseEmissions) + unit;
+                    textHouseCO2.setText(dailyHouseEmissionsStr);
 
-                        String dailyHouseEmissionsStr = df.format(dailyHouseEmissions) + unit;
-                        textHouseCO2.setText(dailyHouseEmissionsStr);
+                    double totalCO2 = personalCO2 + publicCO2 + flightCO2 + beefCO2 + porkCO2
+                            + chickenCO2 + fishCO2 + clothesCO2 + electronicsCO2 + otherCO2
+                            + dailyHouseEmissions;
+                    String totalCO2Str = df.format(totalCO2) + unit;
+                    textTotalCO2.setText(totalCO2Str);
 
-                        double totalCO2 = personalCO2 + publicCO2 + flightCO2 + beefCO2 + porkCO2
-                                + chickenCO2 + fishCO2 + clothesCO2 + electronicsCO2 + otherCO2
-                                + dailyHouseEmissions;
-                        String totalCO2Str = df.format(totalCO2) + unit;
-                        textTotalCO2.setText(totalCO2Str);
-                    } else {
-                        // FATAL ERROR: User must have data
-                        throw new RuntimeException();
-                    }
+                    User.updateCO2(data, userDailyActivityRef, userWeeklyActivityRef,
+                            userMonthlyActivityRef, Date, startOfWeek, monthStr, totalCO2);
+                } else {
+                    // FATAL ERROR: User must have data
+                    throw new RuntimeException();
                 }
             }
 
@@ -465,6 +436,156 @@ public class EcoTrackerHomeFragment extends Fragment {
         });
     }
 
+    private static double calculatePersonalCO2(double personalDist, String carType) {
+        double personalCO2;
+        if (carType.equals("Gasoline")) {
+            personalCO2 = 0.24;
+        } else if (carType.equals("Diesel")) {
+            personalCO2 = 0.27;
+        } else if (carType.equals("Hybrid")) {
+            personalCO2 = 0.16;
+        } else if (carType.equals("Electric")) {
+            personalCO2 = 0.05;
+        } else {
+            personalCO2 = 0;
+        }
+        return personalCO2 * personalDist;
+    }
+
+    private static double calculatePublicCO2(double publicTime) {
+        // from the yearly calculations, estimate roughly 6kg/h on public transit
+        double publicCO2 = 6;
+        return publicCO2 * publicTime;
+    }
+
+    private static double calculateWalkCO2() {
+        return 0;
+    }
+
+    private static double calculateFlightCO2(int numFlight, String haul) {
+        // directly from yearly calculations
+        double flightCO2 = 0;
+        if (haul.equals("Short")) {
+            if (numFlight == 0) {
+                flightCO2 = 0;
+            } else if (numFlight < 3) {
+                flightCO2 = 225;
+            } else if (numFlight < 6) {
+                flightCO2 = 600;
+            } else if (numFlight < 11) {
+                flightCO2 = 1200;
+            } else {
+                flightCO2 = 1800;
+            }
+        } else {
+            if (numFlight == 0) {
+                flightCO2 = 0;
+            } else if (numFlight < 3) {
+                flightCO2 = 825;
+            } else if (numFlight < 6) {
+                flightCO2 = 2200;
+            } else if (numFlight < 11) {
+                flightCO2 = 4400;
+            } else {
+                flightCO2 = 6600;
+            }
+        }
+        return flightCO2;
+    }
+
+    private static double calculateFoodCO2(int numFood, String foodType, String foodWaste) {
+        // Daily / 365 in yearly calculations per meal
+        // remove value dependent on foodWaste
+        // estimate 365*3 = 1095 meals a year
+        double wasteFactor = 0;
+        if (foodWaste.equals("Frequently")) {
+            wasteFactor = 140.4 / 1095;
+        } else if (foodWaste.equals("Occasionally")) {
+            wasteFactor = 70.2 / 1095;
+        } else if (foodWaste.equals("Rarely")) {
+            wasteFactor = 23.4 / 1095;
+        }
+
+        double foodFactor;
+        if (foodType.equals("beef")) {
+            foodFactor = 2500;
+        } else if (foodType.equals("pork")) {
+            foodFactor = 1450;
+        } else if (foodType.equals("chicken")) {
+            foodFactor = 950;
+        } else if (foodType.equals("fish")) {
+            foodFactor = 800;
+        } else {
+            foodFactor = 0;
+        }
+
+        return (numFood * foodFactor / (double) 365) + (numFood * wasteFactor);
+    }
+
+    private static double calculateClothesCO2(int numClothes, String ecoClothes) {
+        // estimation from yearly, 360kg/yr monthly roughly 7kg/piece
+        double clothesCO2 = 1;
+        if (ecoClothes.equals("Regularly")) {
+            clothesCO2 = 0.5;
+        } else if (ecoClothes.equals("Occasionally")) {
+            clothesCO2 = 0.7;
+        }
+        return clothesCO2 * numClothes * 7;
+    }
+
+    private static double calculateElectronicsCO2(int numElectronics) {
+        // 300kg per item
+        return 300 * numElectronics;
+    }
+
+    private static double calculateOtherCO2(int numOther) {
+        // estimate 500kg per item assuming they're large purchases
+        return 500 * numOther;
+    }
+
+    private static double calculateHousingCO2(double yearlyHouseEmissions) {
+        // TODO: get all housing data and access csv data
+        return yearlyHouseEmissions / 365;
+    }
+
+    public static double calculateTotalCO2(Map<String, Object> dailyActivity, Map<String, Object> yearlyData) {
+        String carType = (String) yearlyData.get("carType");
+        String foodWaste = (String) yearlyData.get("foodWaste");
+        // TODO: get all yearly data, then take monthly energy bill data to find value
+        double yearlyHouseEmissions = Double
+                .parseDouble((String) yearlyData.get("houseEmis"));
+        String ecoClothes = (String) yearlyData.get("buyEcoClothes");
+
+        Map<String, Object> transData = (Map<String, Object>) dailyActivity.get("transportation");
+        Map<String, Object> foodData = (Map<String, Object>) dailyActivity.get("food");
+        Map<String, Object> consumpData = (Map<String, Object>) dailyActivity.get("consumption");
+
+        double personalDist = Double.parseDouble((String) transData.get("personal"));
+        double publicTime = Double.parseDouble((String) transData.get("public"));
+        int numFlight = Integer.parseInt((String) transData.get("flightNum"));
+        String haul = (String) transData.get("flightType");
+        int numBeef = Integer.parseInt((String) foodData.get("beef"));
+        int numPork = Integer.parseInt((String) foodData.get("pork"));
+        int numChicken = Integer.parseInt((String) foodData.get("chicken"));
+        int numFish = Integer.parseInt((String) foodData.get("fish"));
+        int numClothes = Integer.parseInt((String) consumpData.get("clothes"));
+        int numElectronics = Integer.parseInt((String) consumpData.get("electronics"));
+        int numOther = Integer.parseInt((String) consumpData.get("other"));
+
+        double personalCO2 = calculatePersonalCO2(personalDist, carType);
+        double publicCO2 = calculatePublicCO2(publicTime);
+        double flightCO2 = calculateFlightCO2(numFlight, haul);
+        double beefCO2 = calculateFoodCO2(numBeef, "beef", foodWaste);
+        double porkCO2 = calculateFoodCO2(numPork, "pork", foodWaste);
+        double chickenCO2 = calculateFoodCO2(numChicken, "chicken", foodWaste);
+        double fishCO2 = calculateFoodCO2(numFish, "fish", foodWaste);
+        double clothesCO2 = calculateClothesCO2(numClothes, ecoClothes);
+        double electronicsCO2 = calculateElectronicsCO2(numElectronics);
+        double otherCO2 = calculateOtherCO2(numOther);
+        double housingCO2 = calculateHousingCO2(yearlyHouseEmissions);
+        return personalCO2 + publicCO2 + flightCO2 + beefCO2 + porkCO2 + chickenCO2 + fishCO2 +
+                clothesCO2 + electronicsCO2 + otherCO2 + housingCO2;
+    }
     private Task<DataSnapshot> getDataFromFirebase(DatabaseReference ref) {
         final TaskCompletionSource<DataSnapshot> taskCompletionSource = new TaskCompletionSource<>();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {

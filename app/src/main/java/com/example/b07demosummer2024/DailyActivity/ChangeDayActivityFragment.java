@@ -1,10 +1,16 @@
 package com.example.b07demosummer2024.DailyActivity;
 
-import android.annotation.SuppressLint;
+import static com.example.b07demosummer2024.DailyActivity.DailyTrackingActivity.userDailyActivityRef;
+import static com.example.b07demosummer2024.DailyActivity.DailyTrackingActivity.userMonthlyActivityRef;
+import static com.example.b07demosummer2024.DailyActivity.DailyTrackingActivity.userRef;
+import static com.example.b07demosummer2024.DailyActivity.DailyTrackingActivity.userWeeklyActivityRef;
+import static com.example.b07demosummer2024.DailyActivity.DailyTrackingActivity.userYearlyActivityRef;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -16,12 +22,23 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.b07demosummer2024.R;
+import com.example.b07demosummer2024.RegisterActivity;
 import com.example.b07demosummer2024.User;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,6 +55,7 @@ public class ChangeDayActivityFragment extends Fragment {
     private int year;
     private int month;
     private int day;
+    private Map<String, Map<String, Object>> prevDailyActivity, weeklyActivity, monthlyActivity;
     TextView Date;
     EditText personaDist, publicTime, walkDist, numFlights, numClothes, numElectronics, numOther,
             otherType, beefMeals, porkMeals, chickenMeals, fishMeals, plantMeals;
@@ -86,8 +104,8 @@ public class ChangeDayActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_change_day_activity, container, false);
 
         Date = (TextView) view.findViewById(R.id.textDate);
-        String formatted_date = year + "-" + (month+1) + "-" + day;
-        Date.setText(formatted_date);
+        String formattedDate = year + "-" + (month+1) + "-" + day;
+        Date.setText(formattedDate);
 
         submitChanges = (Button) view.findViewById(R.id.submitChanges);
 
@@ -120,8 +138,6 @@ public class ChangeDayActivityFragment extends Fragment {
 
         submitChanges.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                DatabaseReference userDailyActivityRef = DailyTrackingActivity.userDailyActivityRef;
-
                 Map<String, Map<String, Object>> updatedActivity = new HashMap<>();
                 String haul_type;
                 double FACTOR = 1;
@@ -140,7 +156,7 @@ public class ChangeDayActivityFragment extends Fragment {
                 int num_plant;
                 int num_clothes;
                 int num_electronics;
-                String other_type = "Other";
+                String other_type;
                 int num_other;
                 if (personaDist.getText().length() == 0) {
                     personal_dist = 0;
@@ -204,6 +220,7 @@ public class ChangeDayActivityFragment extends Fragment {
                     num_electronics = Integer.parseInt(numElectronics.getText().toString());
                 }
                 if (numOther.getText().length() == 0) {
+                    other_type = "Other";
                     num_other = 0;
                 } else {
                     num_other = Integer.parseInt(numOther.getText().toString());
@@ -213,20 +230,132 @@ public class ChangeDayActivityFragment extends Fragment {
                     }
                 }
 
-                User.addDailyActivity(updatedActivity, formatted_date, Double.toString(personal_dist),
-                        Double.toString(public_time), Double.toString(walk_dist), Integer.toString(num_flights), haul_type,
-                        Integer.toString(num_beef), Integer.toString(num_pork), Integer.toString(num_chicken),
-                        Integer.toString(num_fish), Integer.toString(num_plant), Integer.toString(num_clothes),
-                        Integer.toString(num_electronics), other_type, Integer.toString(num_other));
+                // get the first day of the current week (Sunday or Monday depending on Region)
+                Calendar c = Calendar.getInstance();
+                c.set(year, month, day);
+                int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+                int firstDayOfWeek = c.getFirstDayOfWeek();
+                c.add(Calendar.DAY_OF_MONTH, -(dayOfWeek - firstDayOfWeek));
+                int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+                int yearOfWeek = c.get(Calendar.YEAR);
+                int monthOfWeek = c.get(Calendar.MONTH) + 1;
 
-                Map<String, Object> updatedDateActivity = updatedActivity.get(formatted_date);
+                String startOfWeek = yearOfWeek + "-" + monthOfWeek + "-" + dayOfMonth;
 
-                userDailyActivityRef.child(formatted_date).updateChildren(updatedDateActivity);
+                weeklyActivity = new HashMap<>();
 
-                getParentFragmentManager().popBackStackImmediate();
+                String monthStr = year + "-" + (month+1);
+
+                monthlyActivity = new HashMap<>();
+
+                prevDailyActivity = null;
+
+                Task<DataSnapshot> weeklyTask = getDataFromFirebase(userWeeklyActivityRef);
+
+                Task<DataSnapshot> monthlyTask = getDataFromFirebase(userMonthlyActivityRef);
+
+                Task<DataSnapshot> dailyTask = getDataFromFirebase(userDailyActivityRef);
+
+                Task<DataSnapshot> yearlyTask = getDataFromFirebase(userYearlyActivityRef);
+
+                Task<List<Object>> allTasks = Tasks.whenAllSuccess(weeklyTask, monthlyTask,
+                        dailyTask, yearlyTask);
+
+                allTasks.addOnSuccessListener(aVoid -> {
+                    if (weeklyTask.getResult() != null) {
+                        DataSnapshot weekData = weeklyTask.getResult().child(startOfWeek);
+                        if (weekData.exists()) {
+                            weeklyActivity = (Map<String, Map<String, Object>>) weekData.getValue();
+                        }
+                    }
+                    if (monthlyTask.getResult() != null) {
+                        DataSnapshot monthData = monthlyTask.getResult().child(monthStr);
+                        if (monthData.exists()) {
+                            monthlyActivity = (Map<String, Map<String, Object>>) monthData.getValue();
+                        }
+                    }
+                    if (dailyTask.getResult() != null) {
+                        DataSnapshot dailyData = dailyTask.getResult().child(formattedDate);
+                        if (dailyData.exists()) {
+                            prevDailyActivity = (Map<String, Map<String, Object>>) dailyData.getValue();
+                        }
+                    }
+                    Map<String, Object> yearlyData = null;
+                    if (yearlyTask.getResult() != null) {
+                        yearlyData = (Map<String, Object>) yearlyTask.getResult().getValue();
+                    } else {
+                        Toast.makeText(getContext(),
+                                "Error No Yearly Data (Do Annual Questionnaire)", Toast.LENGTH_LONG).show();
+                        getParentFragmentManager().popBackStack();
+                    }
+
+                    double prevTotalCO2 = 0;
+                    if (prevDailyActivity != null) {
+                        Map<String, Object> prevTemp = new HashMap<>();
+                        prevTemp.put("totalCO2", prevDailyActivity.get("totalCO2"));
+                        prevTotalCO2 = Double.parseDouble((String) prevTemp.get("totalCO2"));
+                    }
+
+                    User.addActivity(updatedActivity, weeklyActivity, monthlyActivity, prevDailyActivity,
+                            formattedDate, Double.toString(personal_dist),
+                            Double.toString(public_time), Double.toString(walk_dist),
+                            Integer.toString(num_flights), haul_type, Integer.toString(num_beef),
+                            Integer.toString(num_pork), Integer.toString(num_chicken),
+                            Integer.toString(num_fish), Integer.toString(num_plant), Integer.toString(num_clothes),
+                            Integer.toString(num_electronics), other_type, Integer.toString(num_other));
+
+                    Map<String, Object> updatedDateActivity = updatedActivity.get(formattedDate);
+                    Map<String, Object> updatedWeeklyActivity = new HashMap<>();
+                    updatedWeeklyActivity.put("transportation", weeklyActivity.get("transportation"));
+                    updatedWeeklyActivity.put("food", weeklyActivity.get("food"));
+                    updatedWeeklyActivity.put("consumption", weeklyActivity.get("consumption"));
+                    updatedWeeklyActivity.put("totalCO2", weeklyActivity.get("totalCO2"));
+                    Map<String, Object> updatedMonthlyActivity = new HashMap<>();
+                    updatedMonthlyActivity.put("transportation", monthlyActivity.get("transportation"));
+                    updatedMonthlyActivity.put("food", monthlyActivity.get("food"));
+                    updatedMonthlyActivity.put("consumption", monthlyActivity.get("consumption"));
+                    updatedMonthlyActivity.put("totalCO2", monthlyActivity.get("totalCO2"));
+
+                    userDailyActivityRef.child(formattedDate).updateChildren(updatedDateActivity);
+                    userWeeklyActivityRef.child(startOfWeek).updateChildren(updatedWeeklyActivity);
+                    userMonthlyActivityRef.child(monthStr).updateChildren(updatedMonthlyActivity);
+
+                    double totalCO2 = EcoTrackerHomeFragment.calculateTotalCO2(updatedDateActivity, yearlyData);
+                    double monthCO2 = 0;
+                    if (updatedMonthlyActivity.get("totalCO2") != null) {
+                        monthCO2 = Double.parseDouble((String) updatedMonthlyActivity.get("totalCO2"));
+                    }
+                    double weekCO2 = 0;
+                    if (updatedWeeklyActivity.get("totalCO2") != null) {
+                        weekCO2 = Double.parseDouble((String) updatedWeeklyActivity.get("totalCO2"));
+                    }
+                    User.updateCO2(userDailyActivityRef, userWeeklyActivityRef, userMonthlyActivityRef,
+                            formattedDate, startOfWeek, monthStr, totalCO2, prevTotalCO2, weekCO2, monthCO2);
+
+                    getParentFragmentManager().popBackStack();
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Error Updating Data", Toast.LENGTH_LONG).show();
+                    getParentFragmentManager().popBackStack();
+                });
             }
         });
 
         return view;
+    }
+
+    private Task<DataSnapshot> getDataFromFirebase(DatabaseReference ref) {
+        final TaskCompletionSource<DataSnapshot> taskCompletionSource = new TaskCompletionSource<>();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                taskCompletionSource.setResult(snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                taskCompletionSource.setException(error.toException());
+            }
+        });
+        return taskCompletionSource.getTask();
     }
 }

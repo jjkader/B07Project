@@ -13,10 +13,10 @@
         android:id="@+id/TotalEmissions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
         android:text="Total Emissions"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,10 +25,10 @@
         android:id="@+id/TransTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="75dp"
         android:text="Transportation Emissions"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TotalEmissions" />
@@ -37,10 +37,10 @@
         android:id="@+id/HousingTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="75dp"
         android:text="Housing Emissions"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/FoodTotal" />
@@ -49,10 +49,10 @@
         android:id="@+id/FoodTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="75dp"
         android:text="Food Emissions"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TransTotal" />
@@ -61,10 +61,10 @@
         android:id="@+id/ConsumpTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="75dp"
         android:text="Consumption Emissions"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HousingTotal" />
@@ -76,6 +76,7 @@
         android:layout_marginStart="75dp"
         android:layout_marginTop="25dp"
         android:text="TextView"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TotalEmissions" />
 
@@ -85,6 +86,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
         android:layout_marginTop="25dp"
+        android:text="TextView"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TransTotal" />
 
@@ -95,6 +98,7 @@
         android:layout_marginStart="75dp"
         android:layout_marginTop="25dp"
         android:text="TextView"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/FoodTotal" />
 
@@ -105,6 +109,7 @@
         android:layout_marginStart="75dp"
         android:layout_marginTop="25dp"
         android:text="TextView"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HousingTotal" />
 
@@ -115,6 +120,18 @@
         android:layout_marginStart="75dp"
         android:layout_marginTop="25dp"
         android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ConsumpTotal" />
+
+    <Button
+        android:id="@+id/mainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ConsumpTotal" />
 

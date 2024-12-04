@@ -123,6 +123,8 @@ public class ChangeEnergyBill extends Fragment {
 
                         Toast.makeText(getContext(),
                                 "Updated Energy Bill", Toast.LENGTH_SHORT).show();
+
+                        getParentFragmentManager().popBackStack();
                     } catch(Exception e) {
                         Toast.makeText(getContext(),
                                 "Please enter a valid bill amount", Toast.LENGTH_SHORT).show();
