@@ -30,10 +30,7 @@ public class NavigationActivity extends AppCompatActivity {
         ImageButton logo = findViewById(R.id.planetzeLogo);
         Button buttonNavTracker = findViewById(R.id.buttonNavTracker);
         Button buttonNavGauge = findViewById(R.id.buttonNavGauge);
-        Button buttonNavBalance = findViewById(R.id.buttonNavBalance);
-        Button buttonNavHub = findViewById(R.id.buttonNavHub);
         Button buttonNavCalculate = findViewById(R.id.buttonNavCalculate);
-        Button buttonNavProfile = findViewById(R.id.buttonNavProfile);
 
         logo.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -60,20 +57,6 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
 
-        buttonNavBalance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new SpinnerFragment());
-            } // TODO: Need to replace with the actual fragment once created
-        });
-
-        buttonNavHub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new ManageItemsFragment());
-            } // TODO: Need to replace with the actual fragment once created
-        });
-
         buttonNavCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,13 +65,6 @@ public class NavigationActivity extends AppCompatActivity {
                 NavigationActivity.this.startActivity(myIntent);
                 finish();
             }
-        });
-
-        buttonNavProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFragment(new SpinnerFragment());
-            } // TODO: Need to replace with the actual fragment once created
         });
     }
 
