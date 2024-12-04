@@ -47,16 +47,15 @@ import java.util.Map;
  * A simple {@link Fragment} subclass.
  */
 public class EmissionsTrendFragment extends Fragment {
+    private static final int DAILY_DATA_POINTS = 30;
+    private static final int WEEKLY_DATA_POINTS = 26;
+    private static final int MONTHLY_DATA_POINTS = 12;
     private LineChart chart;
     private TextView tvX;
     private static final DecimalFormat df = new DecimalFormat("0.00");
     private Button backButton, dailyButton, weeklyButton, monthlyButton;
     private Map<String, Map<String, Object>> dailyActivity, weeklyActivity, monthlyActivity;
     private int year, month, day;
-    private String date, startOfWeek, monthStr;
-    private double[] dailyCO2 = new double[30];
-    private double[] weeklyCO2 = new double[52];
-    private double[] monthlyCO2 = new double[24];
     private List<Entry> dailyVals = new ArrayList<>();
     private List<Entry> weeklyVals = new ArrayList<>();
     private List<Entry> monthlyVals = new ArrayList<>();
@@ -76,17 +75,6 @@ public class EmissionsTrendFragment extends Fragment {
         this.year = c.get(Calendar.YEAR);
         this.month = c.get(Calendar.MONTH);
         this.day = c.get(Calendar.DAY_OF_MONTH);
-        this.date = year + "-" + (month+1) + "-" + day;
-        this.monthStr = year + "-" + (month+1);
-
-        // get the first day of the current week (Sunday or Monday depending on Region)
-        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        int firstDayOfWeek = c.getFirstDayOfWeek();
-        c.add(Calendar.DAY_OF_MONTH, -(dayOfWeek - firstDayOfWeek));
-        int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
-        int yearOfWeek = c.get(Calendar.YEAR);
-        int monthOfWeek = c.get(Calendar.MONTH) + 1;
-        this.startOfWeek = yearOfWeek + "-" + monthOfWeek + "-" + dayOfMonth;
     }
 
     @Override
@@ -146,7 +134,7 @@ public class EmissionsTrendFragment extends Fragment {
 
             // fetch past 30 days, 52 weeks, 24 months
             Calendar c = Calendar.getInstance();
-            for (int i = 29; i >= 0; i--) {
+            for (int i = DAILY_DATA_POINTS-1; i >= 0; i--) {
                 c.set(year, month, day);
                 c.add(Calendar.DAY_OF_MONTH, -i);
                 int tmpYear = c.get(Calendar.YEAR);
@@ -165,7 +153,7 @@ public class EmissionsTrendFragment extends Fragment {
             }
 
             int firstDayOfWeek = c.getFirstDayOfWeek();
-            for (int i = 51; i >= 0; i--) {
+            for (int i = WEEKLY_DATA_POINTS-1; i >= 0; i--) {
                 // set to first day of week, then increment by 7
                 c.set(year, month, day);
                 int tmpDayOfWeek = c.get(Calendar.DAY_OF_WEEK);
@@ -186,7 +174,7 @@ public class EmissionsTrendFragment extends Fragment {
                 weeklyVals.add(new Entry(xVal, Float.parseFloat(df.format(yVal))));
             }
 
-            for (int i = 23; i >= 0; i--) {
+            for (int i = MONTHLY_DATA_POINTS-1; i >= 0; i--) {
                 c.set(year, month, day);
                 c.add(Calendar.MONTH, -i);
                 int tmpYear = c.get(Calendar.YEAR);

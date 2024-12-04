@@ -14,13 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.b07demosummer2024.AnnualCarbon.LoadFragment;
+import com.example.b07demosummer2024.NavigationActivity;
 import com.example.b07demosummer2024.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EcoGaugeHomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EcoGaugeHomeFragment extends Fragment {
 
     Button overview, categoryBreakdown, trend, nationalComparison;
@@ -58,14 +55,15 @@ public class EcoGaugeHomeFragment extends Fragment {
         overview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // load overview
+                loadFragment(new EmissionsTrendPartAFragment());
             }
         });
 
         categoryBreakdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // load category breakdown
+                Intent myIntent = new Intent(getContext(), EmissionsGraphActivity.class);
+                getContext().startActivity(myIntent);
             }
         });
 
@@ -79,7 +77,7 @@ public class EcoGaugeHomeFragment extends Fragment {
         nationalComparison.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // load national comparisons
+                loadFragment(new RegionComparisonFragment());
             }
         });
 

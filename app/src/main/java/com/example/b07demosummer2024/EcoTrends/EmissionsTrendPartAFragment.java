@@ -48,68 +48,22 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EmissionsTrendFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EmissionsTrendPartAFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private LineChart chart;
-    private SeekBar seekBarX, seekBarY;
     private TextView tvX;
     private static final DecimalFormat df = new DecimalFormat("0.00");
     private Button backButton, dailyButton, weeklyButton, monthlyButton;
     private Map<String, Object> dailyActivity, weeklyActivity, monthlyActivity;
     private int year, month, day;
     private String date, startOfWeek, monthStr;
-    private double[] dailyCO2 = new double[30];
-    private double[] weeklyCO2 = new double[52];
-    private double[] monthlyCO2 = new double[24];
-    private List<Entry> dailyVals = new ArrayList<>();
-    private List<Entry> weeklyVals = new ArrayList<>();
-    private List<Entry> monthlyVals = new ArrayList<>();
-    private LineDataSet dailySet, weeklySet, monthlySet;
-    private LineData dailyData, weeklyData, monthlyData;
 
 
     public EmissionsTrendPartAFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EmissionsTrendFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EmissionsTrendPartAFragment newInstance(String param1, String param2) {
-        EmissionsTrendPartAFragment fragment = new EmissionsTrendPartAFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
 
         Calendar c = Calendar.getInstance();
         this.year = c.get(Calendar.YEAR);
@@ -184,67 +138,6 @@ public class EmissionsTrendPartAFragment extends Fragment {
                 }
             }
 
-            /*
-                    // fetch past 30 days, 52 weeks, 24 months
-                    Calendar c = Calendar.getInstance();
-                    for (int i = 29; i >= 0; i--) {
-                        c.set(year, month, day);
-                        c.add(Calendar.DAY_OF_MONTH, -i);
-                        int tmpYear = c.get(Calendar.YEAR);
-                        int tmpMonth = c.get(Calendar.MONTH) + 1;
-                        int tmpDay = c.get(Calendar.DAY_OF_MONTH);
-                        String tmpDate = tmpYear + "-" + tmpMonth + "-" + tmpDay;
-                        Map<String, Object> tmpDayActivity = dailyActivity.get(tmpDate);
-                        float xVal = (new Date(tmpYear - 1900, tmpMonth - 1, tmpDay)).getTime();
-                        float yVal;
-                        if (tmpDayActivity == null) {
-                            yVal = 0;
-                        } else {
-                            yVal = Float.parseFloat(tmpDayActivity.get("totalCO2").toString());
-                        }
-                        dailyVals.add(new Entry(xVal, Float.parseFloat(df.format(yVal))));
-                    }
-
-                    int firstDayOfWeek = c.getFirstDayOfWeek();
-                    for (int i = 51; i >= 0; i--) {
-                        // set to first day of week, then increment by 7
-                        c.set(year, month, day);
-                        int tmpDayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-                        c.add(Calendar.DAY_OF_MONTH, -(tmpDayOfWeek - firstDayOfWeek));
-                        c.add(Calendar.DAY_OF_MONTH, -7 * i);
-                        int tmpYear = c.get(Calendar.YEAR);
-                        int tmpMonth = c.get(Calendar.MONTH) + 1;
-                        int tmpDay = c.get(Calendar.DAY_OF_MONTH);
-                        String tmpDate = tmpYear + "-" + tmpMonth + "-" + tmpDay;
-                        Map<String, Object> tmpWeekActivity = weeklyActivity.get(tmpDate);
-                        float xVal = (new Date(tmpYear - 1900, tmpMonth - 1, tmpDay)).getTime();
-                        float yVal;
-                        if (tmpWeekActivity == null) {
-                            yVal = 0;
-                        } else {
-                            yVal = Float.parseFloat(tmpWeekActivity.get("totalCO2").toString());
-                        }
-                        weeklyVals.add(new Entry(xVal, Float.parseFloat(df.format(yVal))));
-                    }
-
-                    for (int i = 23; i >= 0; i--) {
-                        c.set(year, month, day);
-                        c.add(Calendar.MONTH, -i);
-                        int tmpYear = c.get(Calendar.YEAR);
-                        int tmpMonth = c.get(Calendar.MONTH) + 1;
-                        String tmpDate = tmpYear + "-" + tmpMonth;
-                        Map<String, Object> tmpMonthActivity = monthlyActivity.get(tmpDate);
-                        float xVal = (new Date(tmpYear - 1900, tmpMonth - 1, 1)).getTime();
-                        float yVal;
-                        if (tmpMonthActivity == null) {
-                            yVal = 0;
-                        } else {
-                            yVal = Float.parseFloat(tmpMonthActivity.get("totalCO2").toString());
-                        }
-                        monthlyVals.add(new Entry(xVal, Float.parseFloat(df.format(yVal))));
-                    }
-
-             */
             setToDaily();
                 }).addOnFailureListener(e -> {
             Toast.makeText(getContext(), "Error Fetching Data", Toast.LENGTH_LONG).show();
@@ -254,54 +147,52 @@ public class EmissionsTrendPartAFragment extends Fragment {
 
         //MonthlyActivity.getCO2 with parsing double ex.
 
-            backButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getParentFragmentManager().popBackStack();
                     getParentFragmentManager().popBackStack();
-                    // currently main fragment, so push back to navigation
-                    Intent myIntent = new Intent(getContext(), NavigationActivity.class);
-                    getContext().startActivity(myIntent);
                 }
             });
 
-            dailyButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setToDaily();
-                }
-            });
+        dailyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setToDaily();
+            }
+        });
 
-            weeklyButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setToWeekly();
-                }
-            });
+        weeklyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setToWeekly();
+            }
+        });
 
-            monthlyButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setToMonthly();
-                }
-            });
-            return view;
-        }
+        monthlyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setToMonthly();
+            }
+        });
+        return view;
+    }
 
-        private Task<DataSnapshot> getDataFromFirebase(DatabaseReference ref) {
-            final TaskCompletionSource<DataSnapshot> taskCompletionSource = new TaskCompletionSource<>();
-            ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    taskCompletionSource.setResult(snapshot);
-                }
+    private Task<DataSnapshot> getDataFromFirebase(DatabaseReference ref) {
+        final TaskCompletionSource<DataSnapshot> taskCompletionSource = new TaskCompletionSource<>();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                taskCompletionSource.setResult(snapshot);
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    taskCompletionSource.setException(error.toException());
-                }
-            });
-            return taskCompletionSource.getTask();
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                taskCompletionSource.setException(error.toException());
+            }
+        });
+        return taskCompletionSource.getTask();
+    }
 
     private void setToDaily() {
         if (dailyActivity == null) {

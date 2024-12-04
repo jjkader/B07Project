@@ -19,7 +19,7 @@
             android:name=".DailyActivity.HabitTrackerActivity"
             android:exported="false" />
         <activity
-            android:name=".EmissionsGraphActivity"
+            android:name=".EcoTrends.EmissionsGraphActivity"
             android:exported="false" />
         <activity
             android:name=".HabitSearchActivity"
