@@ -1,31 +1,31 @@
 package com.example.b07demosummer2024.AnnualCarbon;
 
+import static java.lang.Double.parseDouble;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.b07demosummer2024.LoginActivity;
 import com.example.b07demosummer2024.NavigationActivity;
 import com.example.b07demosummer2024.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,9 +53,8 @@ public class CarbonCalculationsFragment extends LoadFragment {
         FirebaseDatabase fdb = FirebaseDatabase.getInstance(
                 "https://b07project-725cc-default-rtdb.firebaseio.com/");
         DatabaseReference reference = fdb.getReference().child("users").child(uid);
-
-
         AnnualCarbonInformation aci = new AnnualCarbonInformation(getContext());
+
         String transEmissions = (aci.transportationCalc()) + " kg";
         String foodEmissions = (aci.foodCalc()) + " kg";
         String houseEmissions = (aci.housingCalc()) + " kg";
@@ -72,12 +71,19 @@ public class CarbonCalculationsFragment extends LoadFragment {
         data.put("carType", aci.getCarType());
         data.put("foodWaste", aci.getFoodWaste());
         data.put("buyEcoClothes", aci.getBuyEcoClothes());
-        data.put("howOftenRecycle", aci.getHowOftenRecycle());
+        data.put("homeType", aci.getHomeType());
+        data.put("numInHome", aci.getNumInHome());
+        data.put("homeSize", aci.getHomeSize());
+        data.put("heatEnergy", aci.getHeatEnergy());
+        data.put("averageBill", aci.getAverageBill());
+        data.put("waterType", aci.getWaterType());
+        data.put("useRenewable", aci.getUseRenewable());
         data.put("transportEmis", Double.toString(aci.transportationCalc()));
         data.put("foodEmis", Double.toString(aci.foodCalc()));
         data.put("houseEmis", Double.toString(aci.housingCalc()));
         data.put("consumpEmis", Double.toString(aci.consumptionCalc()));
         data.put("totalEmis", Double.toString(aci.totalCalc()));
+        data.put("country",  aci.getCountry());
         reference.child("Yearly Data").updateChildren(data);
 
         mainMenu.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +94,7 @@ public class CarbonCalculationsFragment extends LoadFragment {
                 getContext().startActivity(myIntent);
             }
         });
-
         return view;
     }
 }
+
