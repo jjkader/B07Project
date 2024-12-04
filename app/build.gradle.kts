@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation (libs.mpandroidchart)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -61,6 +62,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.google.firebase.auth)
+    implementation(libs.mpandroidchart)
 }
 
 tasks.withType<Test> {

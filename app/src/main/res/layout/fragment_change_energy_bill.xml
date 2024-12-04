@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey"
+    tools:context=".DailyActivity.ChangeEnergyBill">
+
+    <ImageButton
+        android:id="@+id/planetzeLogo"
+        android:layout_width="210dp"
+        android:layout_height="85dp"
+        android:backgroundTint="@color/light_grey"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/calendarView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/planetze_logo" />
+
+    <TextView
+        android:id="@+id/textDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textEnergyTypeQuestion"
+        app:layout_constraintEnd_toStartOf="@+id/planetzeLogo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textEnergyTypeQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="What Type of Energy Heats Your House?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/planetzeLogo" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupEnergyType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/editTextBill"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textEnergyTypeQuestion">
+
+        <RadioButton
+            android:id="@+id/radioGas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Natural Gas" />
+
+        <RadioButton
+            android:id="@+id/radioElectricity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Electricity" />
+
+        <RadioButton
+            android:id="@+id/radioOil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Oil" />
+
+        <RadioButton
+            android:id="@+id/radioPropane"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Propane" />
+
+        <RadioButton
+            android:id="@+id/radioWood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Wood" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/editTextBill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Bill Amount ($)"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/setBill"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupEnergyType" />
+
+    <Button
+        android:id="@+id/setBill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/turquoise"
+        android:text="Set Bill"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBill" />
+</androidx.constraintlayout.widget.ConstraintLayout>
