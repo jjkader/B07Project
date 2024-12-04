@@ -164,5 +164,16 @@ public class RegisterActivity extends AppCompatActivity {
     private void addToDatabase(DatabaseReference db, User u, String uid){
         DatabaseReference key = db.child("users").child(uid);
         key.setValue(u);
+        DatabaseReference habits_key = key.child("Habits");
+        habits_key.child("habit1").setValue(-1);
+        habits_key.child("habit2").setValue(-1);
+        habits_key.child("habit3").setValue(-1);
+        habits_key.child("habit4").setValue(-1);
+        habits_key.child("habit5").setValue(-1);
+        habits_key.child("habit6").setValue(-1);
+        habits_key.child("habit7").setValue(-1);
+        habits_key.child("habit8").setValue(-1);
+        habits_key.child("habit9").setValue(-1);
+        habits_key.child("habit10").setValue(-1);
     }
 }
