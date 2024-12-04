@@ -112,7 +112,14 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Fragment fragment = EcoTrackerHomeFragment.newInstance(year, month, day);
-                loadFragment(fragment);
+                // clear back stack before reaching EcoTrackerHomeFragment
+                FragmentManager fragmentManager = getParentFragmentManager();
+                for(int i = 0; i < fragmentManager.getBackStackEntryCount(); ++i) {
+                    fragmentManager.popBackStack();
+                }
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragment_container, fragment);
+                transaction.commit();
             }
         });
 
