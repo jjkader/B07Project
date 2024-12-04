@@ -31,7 +31,7 @@
             android:name=".AnnualCarbon.AnnualCarbonActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".LoginView"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
