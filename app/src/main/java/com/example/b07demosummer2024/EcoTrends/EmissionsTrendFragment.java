@@ -110,16 +110,16 @@ public class EmissionsTrendFragment extends Fragment {
 
         taskComplete.addOnSuccessListener(aVoid -> {
             if (task.getResult() == null) {
-                Toast.makeText(getContext(), "Error Fetching Data", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Error: No Data", Toast.LENGTH_LONG).show();
                 getParentFragmentManager().popBackStack();
-            } else if (task.getResult().child("dailyActivity") == null) {
-                Toast.makeText(getContext(), "Error Fetching Data", Toast.LENGTH_LONG).show();
+            } else if (task.getResult().child("dailyActivity").getValue() == null) {
+                Toast.makeText(getContext(), "Error: No Data", Toast.LENGTH_LONG).show();
                 getParentFragmentManager().popBackStack();
-            } else if (task.getResult().child("weeklyActivity") == null) {
-                Toast.makeText(getContext(), "Error Fetching Data", Toast.LENGTH_LONG).show();
+            } else if (task.getResult().child("weeklyActivity").getValue() == null) {
+                Toast.makeText(getContext(), "Error: No Data", Toast.LENGTH_LONG).show();
                 getParentFragmentManager().popBackStack();
-            } else if (task.getResult().child("monthlyActivity") == null) {
-                Toast.makeText(getContext(), "Error Fetching Data", Toast.LENGTH_LONG).show();
+            } else if (task.getResult().child("monthlyActivity").getValue() == null) {
+                Toast.makeText(getContext(), "Error: No Data", Toast.LENGTH_LONG).show();
                 getParentFragmentManager().popBackStack();
             }
             dailyActivity = (Map<String, Map<String, Object>>)
