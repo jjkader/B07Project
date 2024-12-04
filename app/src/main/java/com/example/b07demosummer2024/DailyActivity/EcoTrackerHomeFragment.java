@@ -418,7 +418,7 @@ public class EcoTrackerHomeFragment extends Fragment {
                     String totalCO2Str = df.format(totalCO2) + unit;
                     textTotalCO2.setText(totalCO2Str);
 
-                    User.updateCO2(data, userDailyActivityRef, userWeeklyActivityRef,
+                    User.updateCO2(snapshot, userDailyActivityRef, userWeeklyActivityRef,
                             userMonthlyActivityRef, Date, startOfWeek, monthStr, totalCO2);
                 } else {
                     // FATAL ERROR: User must have data

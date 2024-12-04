@@ -78,8 +78,8 @@ public class EmissionsTrendPartAFragment extends Fragment {
         c.add(Calendar.DAY_OF_MONTH, -(dayOfWeek - firstDayOfWeek));
         int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
         int yearOfWeek = c.get(Calendar.YEAR);
-        int monthOfWeek = c.get(Calendar.MONTH) + 1;
-        this.startOfWeek = yearOfWeek + "-" + monthOfWeek + "-" + dayOfMonth;
+        int monthOfWeek = c.get(Calendar.MONTH);
+        this.startOfWeek = yearOfWeek + "-" + (monthOfWeek+1) + "-" + dayOfMonth;
     }
 
     @Override
@@ -105,11 +105,11 @@ public class EmissionsTrendPartAFragment extends Fragment {
 
 
         // get all information
-        Task<DataSnapshot> weeklyTask = getDataFromFirebase(userWeeklyActivityRef);
+        Task<DataSnapshot> weeklyTask = getDataFromFirebase(userWeeklyActivityRef, startOfWeek);
 
-        Task<DataSnapshot> monthlyTask = getDataFromFirebase(userMonthlyActivityRef);
+        Task<DataSnapshot> monthlyTask = getDataFromFirebase(userMonthlyActivityRef, monthStr);
 
-        Task<DataSnapshot> dailyTask = getDataFromFirebase(userDailyActivityRef);
+        Task<DataSnapshot> dailyTask = getDataFromFirebase(userDailyActivityRef, date);
 
         Task<List<Object>> allTasks = Tasks.whenAllSuccess(weeklyTask, monthlyTask,
                 dailyTask);
@@ -119,41 +119,28 @@ public class EmissionsTrendPartAFragment extends Fragment {
         monthlyActivity = null;
 
         allTasks.addOnSuccessListener(aVoid -> {
-            if (weeklyTask.getResult() != null) {
-                DataSnapshot weekData = weeklyTask.getResult().child(startOfWeek);
-                if (weekData.exists()) {
-                    weeklyActivity = (Map<String, Object>) weekData.getValue();
-                }
-            }
-            if (monthlyTask.getResult() != null) {
-                DataSnapshot monthData = monthlyTask.getResult().child(monthStr);
-                if (monthData.exists()) {
-                    monthlyActivity = (Map<String, Object>) monthData.getValue();
-                }
-            }
-            if (dailyTask.getResult() != null) {
-                DataSnapshot dailyData = dailyTask.getResult().child(date);
-                if (dailyData.exists()) {
-                    dailyActivity = (Map<String, Object>) dailyData.getValue();
-                }
+            if (dailyTask.getResult() == null ||
+                    weeklyTask.getResult() == null || monthlyTask.getResult() == null) {
+                Toast.makeText(getContext(), "No Data", Toast.LENGTH_LONG).show();
+                getParentFragmentManager().popBackStack();
             }
 
+            weeklyActivity = (Map<String, Object>) weeklyTask.getResult().getValue();
+            monthlyActivity = (Map<String, Object>) monthlyTask.getResult().getValue();
+            dailyActivity = (Map<String, Object>) dailyTask.getResult().getValue();
+
             setToDaily();
-                }).addOnFailureListener(e -> {
+        }).addOnFailureListener(e -> {
             Toast.makeText(getContext(), "Error Fetching Data", Toast.LENGTH_LONG).show();
             getParentFragmentManager().popBackStack();
         });
-
-
-        //MonthlyActivity.getCO2 with parsing double ex.
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getParentFragmentManager().popBackStack();
-                    getParentFragmentManager().popBackStack();
-                }
-            });
+            }
+        });
 
         dailyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,9 +165,9 @@ public class EmissionsTrendPartAFragment extends Fragment {
         return view;
     }
 
-    private Task<DataSnapshot> getDataFromFirebase(DatabaseReference ref) {
+    private Task<DataSnapshot> getDataFromFirebase(DatabaseReference ref, String date) {
         final TaskCompletionSource<DataSnapshot> taskCompletionSource = new TaskCompletionSource<>();
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child(date).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 taskCompletionSource.setResult(snapshot);
@@ -210,9 +197,9 @@ public class EmissionsTrendPartAFragment extends Fragment {
             Toast.makeText(getContext(), "No data available for weekly trends", Toast.LENGTH_SHORT).show();
             return;
         }
-        String text = "You've emitted: "
-                + (df.format(Double.parseDouble(weeklyActivity.get("totalCO2").toString())))
-                + " kg CO2e this week!";
+        double total = Double.parseDouble(weeklyActivity.get("totalCO2").toString());
+        String totalStr = df.format(total);
+        String text = "You've emitted: " + totalStr + " kg CO2e this week!";
         tvX.setText(text);
     }
 

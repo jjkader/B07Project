@@ -43,9 +43,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class EmissionsTrendFragment extends Fragment {
     private static final int DAILY_DATA_POINTS = 30;
     private static final int WEEKLY_DATA_POINTS = 26;
@@ -222,10 +219,7 @@ public class EmissionsTrendFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //getParentFragmentManager().popBackStack();
-                // currently main fragment, so push back to navigation
-                Intent myIntent = new Intent(getContext(), NavigationActivity.class);
-                getContext().startActivity(myIntent);
+                getParentFragmentManager().popBackStack();
             }
         });
 

@@ -207,7 +207,10 @@ public class User {
                                  DatabaseReference weeklyRef, DatabaseReference monthlyRef,
                                  String date, String startOfWeek, String monthStr, double totalDayCO2) {
         Map<String, Object> CO2Total = new HashMap<>();
-        Double prevCO2Total = (Double) data.child("dailyActivity").child(date).child("totalCO2").getValue();
+        Map<String, Object> dailyActivity = (Map<String, Object>) data.child("dailyActivity").child(date).getValue();
+        Map<String, Object> weeklyActivity = (Map<String, Object>) data.child("weeklyActivity").child(startOfWeek).getValue();
+        Map<String, Object> monthlyActivity = (Map<String, Object>) data.child("monthlyActivity").child(monthStr).getValue();
+        Double prevCO2Total = Double.parseDouble(dailyActivity.get("totalCO2").toString());
         if (prevCO2Total == null) {
             prevCO2Total = 0.0;
         }
@@ -215,7 +218,7 @@ public class User {
         dailyRef.child(date).updateChildren(CO2Total);
 
         Map<String, Object> weekCO2Total = new HashMap<>();
-        Double weekCO2 = (Double) data.child("weeklyActivity").child(startOfWeek).child("totalCO2").getValue();
+        Double weekCO2 = Double.parseDouble(weeklyActivity.get("totalCO2").toString());
         if (weekCO2 == null) {
             weekCO2 = 0.0;
         }
@@ -223,7 +226,7 @@ public class User {
         weeklyRef.child(startOfWeek).updateChildren(weekCO2Total);
 
         Map<String, Object> monthCO2Total = new HashMap<>();
-        Double monthCO2 = (Double) data.child("monthlyActivity").child(monthStr).child("totalCO2").getValue();
+        Double monthCO2 = Double.parseDouble(monthlyActivity.get("totalCO2").toString());
         if (monthCO2 == null) {
             monthCO2 = 0.0;
         }
